@@ -21,14 +21,25 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Garantir permissao no gradlew
-        run: chmod +x ./gradlew
-
-      - name: Compilar APK com Gradle
-        run: ./gradlew assembleDebug --stacktrace
+      - name: Compilar APK
+        run: |
+          # Procura o arquivo gradlew em qualquer subpasta do repositorio
+          GRADLEW_PATH=$(find . -name gradlew -type f | head -n 1)
+          
+          if [ -z "$GRADLEW_PATH" ]; then
+            echo "Erro: Arquivo gradlew nao encontrado no repositorio."
+            exit 1
+          fi
+          
+          PROJECT_DIR=$(dirname "$GRADLEW_PATH")
+          echo "Projeto encontrado na pasta: $PROJECT_DIR"
+          
+          chmod +x "$GRADLEW_PATH"
+          cd "$PROJECT_DIR"
+          ./gradlew assembleDebug --no-daemon
 
       - name: Upload do APK Gerado
         uses: actions/upload-artifact@v4
         with:
           name: MK20-Tone-Generator-APK
-          path: app/build/outputs/apk/debug/*.apk
+          path: '**/build/outputs/apk/debug/*.apk'
