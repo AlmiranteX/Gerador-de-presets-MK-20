@@ -21,13 +21,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Gerar Wrapper do Gradle 8.8
+      - name: Executar Gradle
         run: |
-          gradle wrapper --gradle-version 8.8
           chmod +x gradlew
-
-      - name: Compilar APK com Gradle Wrapper
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
+          gradle assembleDebug --no-daemon --stacktrace
 
       - name: Upload do APK Gerado
         uses: actions/upload-artifact@v4
