@@ -21,23 +21,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Configurar e Executar Build com Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          build-scan-publish: false
+      - name: Garantir permissao no gradlew
+        run: chmod +x ./gradlew
 
-      - name: Compilar APK
-        run: |
-          if [ -f "./gradlew" ]; then
-            chmod +x gradlew
-            ./gradlew assembleDebug --no-daemon
-          else
-            find . -name gradlew -exec chmod +x {} \;
-            find . -name gradlew -execdir ./gradlew assembleDebug --no-daemon \;
-          fi
+      - name: Compilar APK com Gradle
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload do APK Gerado
         uses: actions/upload-artifact@v4
         with:
           name: MK20-Tone-Generator-APK
-          path: '**/build/outputs/apk/debug/*.apk'
+          path: app/build/outputs/apk/debug/*.apk
