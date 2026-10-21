@@ -21,11 +21,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Instalar Gradle na Nuvem
-        uses: gradle/actions/setup-gradle@v3
+      - name: Gerar Wrapper do Gradle
+        run: |
+          gradle wrapper --gradle-version 8.7
+          chmod +x gradlew
 
-      - name: Compilar APK Android
-        run: gradle assembleDebug --no-daemon
+      - name: Compilar APK com Gradle Wrapper
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload do APK Gerado
         uses: actions/upload-artifact@v4
