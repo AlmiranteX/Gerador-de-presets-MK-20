@@ -21,22 +21,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Compilar APK
-        run: |
-          # Procura o arquivo gradlew em qualquer subpasta do repositorio
-          GRADLEW_PATH=$(find . -name gradlew -type f | head -n 1)
-          
-          if [ -z "$GRADLEW_PATH" ]; then
-            echo "Erro: Arquivo gradlew nao encontrado no repositorio."
-            exit 1
-          fi
-          
-          PROJECT_DIR=$(dirname "$GRADLEW_PATH")
-          echo "Projeto encontrado na pasta: $PROJECT_DIR"
-          
-          chmod +x "$GRADLEW_PATH"
-          cd "$PROJECT_DIR"
-          ./gradlew assembleDebug --no-daemon
+      - name: Instalar Gradle na Nuvem
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Compilar APK Android
+        run: gradle assembleDebug --no-daemon
 
       - name: Upload do APK Gerado
         uses: actions/upload-artifact@v4
