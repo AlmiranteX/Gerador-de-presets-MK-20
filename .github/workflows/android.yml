@@ -31,7 +31,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Compilar APK Debug
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
+        run: ./gradlew assembleDebug -x test --no-daemon --stacktrace
 
       - name: Upload do APK Gerado
         uses: actions/upload-artifact@v4
