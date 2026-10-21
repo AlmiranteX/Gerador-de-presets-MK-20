@@ -2,6 +2,7 @@ package com.example
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import com.example.R // <--- Importação explícita do R do app corrigida
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -12,10 +13,10 @@ import org.robolectric.annotation.Config
 @Config(sdk = [36])
 class ExampleRobolectricTest {
 
-  @Test
-  fun `read string from context`() {
-    val context = ApplicationProvider.getApplicationContext<Context>()
-    val appName = context.getString(R.string.app_name)
-    assertEquals("MK-20 Tone Generator", appName)
-  }
+    @Test
+    fun `read string from context`() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val appName = context.getString(R.string.app_name)
+        assertEquals("MK-20 Tone Generator", appName)
+    }
 }
