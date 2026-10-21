@@ -33,12 +33,12 @@ private val DarkColorScheme = darkColorScheme(
     outlineVariant = MetalBorderHighlight
 )
 
-private val LightColorScheme = DarkColorScheme // Pedalboard uses purposeful high-contrast dark metallic scheme
+private val LightColorScheme = DarkColorScheme // O app utiliza o tema escuro metálico da pedaleira
 
 @Composable
 fun MyApplicationTheme(
-    darkTheme: Boolean = true, // Default to pedalboard dark theme
-    dynamicColor: Boolean = false, // Keep consistent pedalboard brand styling
+    darkTheme: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
