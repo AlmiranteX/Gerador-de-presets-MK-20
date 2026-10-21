@@ -21,13 +21,20 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Executar Gradle
-        run: |
-          chmod +x gradlew
-          gradle assembleDebug --no-daemon --stacktrace
+      - name: Apagar gradlew antigo se existir
+        run: rm -f gradlew
+
+      - name: Criar Gradle Wrapper Oficial no Linux
+        run: gradle wrapper --gradle-version 8.8
+
+      - name: Dar permissao de execucao
+        run: chmod +x gradlew
+
+      - name: Compilar APK Debug
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload do APK Gerado
         uses: actions/upload-artifact@v4
         with:
           name: MK20-Tone-Generator-APK
-          path: '**/build/outputs/apk/debug/*.apk'
+          path: '**/*.apk'
