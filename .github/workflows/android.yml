@@ -25,7 +25,7 @@ jobs:
         run: rm -f gradlew
 
       - name: Criar Gradle Wrapper Oficial no Linux
-        run: gradle wrapper --gradle-version 8.8
+        run: gradle wrapper --gradle-version 9.3.1
 
       - name: Dar permissao de execucao
         run: chmod +x gradlew
