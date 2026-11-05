@@ -160,6 +160,8 @@ namespace Preset20AI
 
                 byte[] htmlBytes = Encoding.UTF8.GetBytes(AppHtml.GetHtml());
                 ctx.Response.ContentType = "text/html; charset=utf-8";
+                ctx.Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0";
+                ctx.Response.Headers["Pragma"] = "no-cache";
                 ctx.Response.ContentLength64 = htmlBytes.Length;
                 ctx.Response.OutputStream.Write(htmlBytes, 0, htmlBytes.Length);
                 ctx.Response.OutputStream.Close();
@@ -171,6 +173,7 @@ namespace Preset20AI
         {
             byte[] buf = Encoding.UTF8.GetBytes(json);
             ctx.Response.ContentType = "application/json; charset=utf-8";
+            ctx.Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0";
             ctx.Response.ContentLength64 = buf.Length;
             ctx.Response.OutputStream.Write(buf, 0, buf.Length);
             ctx.Response.OutputStream.Close();
@@ -2270,7 +2273,7 @@ async function generateAiPreset() {
 async function callGeminiForPreset(query, notes) {
   try {
     const base = createPresetFromSong(query, notes);
-    const prompt = `Você é o engenheiro de timbres oficial da pedaleira M-VAVE MK-20. Crie um timbre para: ""${query}"" (${notes}). Responda APENAS um JSON com {"title":"...","style":"...","guitarType":"...","pickupPosition":"...","bpm":120,"description":"..."} em português.`;
+    const prompt = `Você é o engenheiro de timbres oficial da pedaleira M-VAVE MK-20. Crie um timbre para: ""${query}"" (${notes}). Responda APENAS um JSON com {""title"":""..."",""style"":""..."",""guitarType"":""..."",""pickupPosition"":""..."",""bpm"":120,""description"":""...""} em português.`;
     const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(appSettings.geminiApiKey.trim()), {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
