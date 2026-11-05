@@ -1,5 +1,5 @@
 {
-  "name": "MK-20 Tone Generator",
+  "name": "Preset20 AI",
   "description": "Gerador de presets para pedaleira M-VAVE MK-20 com IA Gemini, visualizador de cadeia de sinal, salvamento local e compartilhamento via link ou JSON.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

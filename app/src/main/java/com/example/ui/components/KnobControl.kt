@@ -61,8 +61,51 @@ fun KnobControl(
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Bold
             )
+            val formattedValue = when {
+                unit == "ON/OFF" ||
+                    label.equals("Sync", ignoreCase = true) ||
+                    label.equals("inputDetect", ignoreCase = true) ||
+                    label.equals("LPtype", ignoreCase = true) ||
+                    label.equals("boost", ignoreCase = true) -> if (value.toInt() == 0) "OFF" else "ON"
+                unit == "LFO_WAVE" -> when (value.toInt()) {
+                    1 -> "sin"
+                    2 -> "sqw"
+                    3 -> "saw"
+                    4 -> "tri"
+                    5 -> "wav"
+                    else -> "sin"
+                }
+                unit == "CHORUS_MODE" -> when (value.toInt()) {
+                    1 -> "harm"
+                    2 -> "sin"
+                    3 -> "sqw"
+                    4 -> "saw"
+                    5 -> "tri"
+                    6 -> "wav"
+                    else -> "harm"
+                }
+                unit == "TREM_MODE" -> when (value.toInt()) {
+                    1 -> "sin"
+                    2 -> "tube"
+                    3 -> "phtn"
+                    else -> "phtn"
+                }
+                unit == "WHAMMY_MODE" -> when (value.toInt()) {
+                    1 -> "mbody"
+                    2 -> "oct1"
+                    3 -> "oct2"
+                    else -> "oct1"
+                }
+                unit == "DEC10" -> String.format(java.util.Locale.US, "%.1f", value)
+                unit == "dB_EQ" -> {
+                    val sign = if (value > 0.05f) "+" else ""
+                    String.format(java.util.Locale.US, "%s%.1fdB", sign, value)
+                }
+                unit == "ms" -> String.format(java.util.Locale.US, "%.3fs", value / 1000f)
+                else -> "${value.toInt()}$unit"
+            }
             Text(
-                text = "${value.toInt()}$unit",
+                text = formattedValue,
                 style = MaterialTheme.typography.labelSmall,
                 fontFamily = FontFamily.Monospace,
                 color = activeColor,

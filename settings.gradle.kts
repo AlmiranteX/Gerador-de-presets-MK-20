@@ -22,6 +22,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "MK-20 Tone Generator"
+rootProject.name = "Preset20 AI"
 
 include(":app")

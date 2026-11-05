@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -75,13 +76,16 @@ fun PedalStompCard(
 ) {
     val themeColor = remember(pedalKey) {
         when (pedalKey) {
-            "NR" -> LedPurple
+            "FX" -> LedPink
+            "NS", "NR" -> LedPurple
             "DS" -> LedAmber
             "AMP" -> LedCyan
             "CAB" -> LedEmerald
+            "EQ" -> LedCyan
             "MOD" -> LedBlue
             "DELAY" -> LedIndigo
             "REVERB" -> LedPink
+            "VOL" -> LedEmerald
             else -> LedEmerald
         }
     }
@@ -95,35 +99,16 @@ fun PedalStompCard(
 
     val availableModels = remember(pedalKey) {
         when (pedalKey) {
-            "NR" -> listOf("Noise Gate")
-            "DS" -> listOf(
-                "1BLUES_OD", "2TS8", "3DS1", "4DS2", "5M-VAVE_OD", "6M-VAVE_DS",
-                "7M-VAVE_TS1", "8M-VAVE_TS2", "9SUPA_1", "10SUPA_2", "11RAT", "12RAT_BT",
-                "13JHS_1", "14JHS_2", "15MT_1", "16MT_2", "20HIGAIN", "22TS-9",
-                "23BIG-DR", "24CL_BOOST", "31BOG_DS", "36SuperOD", "37BLUES_DR", "39BIG-MUFF"
-            )
-            "AMP" -> listOf(
-                "26CL2_JC120", "25CL1_JC120", "13CL1_FenDi", "14CL2_FenDi", "15CL3_FenDi",
-                "1CL1_410H", "2CL2_410H", "3CR1_410H", "4CR2_410H", "5CR3_410H",
-                "6OD1_410H", "7OD2_410H", "8OD3_410H", "34OD2_JVMcrunch", "86OD_JCM800",
-                "87DS_JCM800", "51OD1_MS2203", "19CL1_J900", "22OD1_J900", "23DS1_J900",
-                "27OD1_JHS", "28OD2_JHS", "30DS_JHS", "74OD_ENGL 120", "75DS_ENGL 120",
-                "76CL_SoldSolo100", "77OD_SoldSolo100", "78DS_SoldSolo100", "79OD_5150III",
-                "80DS_5150III", "81CL_VOSAC30", "82OD_VOSAC30", "83CL_DiezzlVH4",
-                "85DS_DiezzlVH4", "88OD_Peavev6505", "89DS_Peavev6505", "18HVMetal _1",
-                "48CH1_ME", "49CH2_ME", "64DS1_XC", "102ApSVT_BS", "91AgB659_BS", "94Ap50_BS"
-            )
-            "CAB" -> listOf(
-                "20FdTwRev212A", "21FdTwRev212B", "11FdTR65R212B", "10FdTR65R212A",
-                "13FdDelux112A", "16FdDTweed112", "17FdPrinc110A", "61RJ120azz212",
-                "1BogUber412A", "2BogUber412B", "4BogUber412D", "8EngXXL412", "9EvStright412",
-                "33Mar60A412A", "36Mar60B412A", "46MbOS412A", "57MbTradS412B", "58OgPPC412A",
-                "22Fman212A", "26HesModn212A", "64VAC30TBC212", "66ZillCab212",
-                "71GisonHubird", "74TaylrOcE", "80AmpgSVT810", "82Bareface110", "90GK410RB410B"
-            )
-            "MOD" -> listOf("Dimensional Chorus", "Vintage Flanger", "Phase 90", "Optical Tremolo", "Uni-Vibe")
-            "DELAY" -> listOf("Analog Delay", "Digital Delay", "Tape Echo", "Dotted Eighth", "Ping Pong")
-            "REVERB" -> listOf("Plate Reverb", "Shimmer Reverb", "Hall Reverb", "Spring 63", "Room Reverb")
+            "FX" -> com.example.data.model.Mk20Catalog.FX_MODELS.map { it.name }
+            "NS", "NR" -> com.example.data.model.Mk20Catalog.NS_MODELS.map { it.name }
+            "DS" -> com.example.data.model.Mk20Catalog.DS_MODELS.map { it.name }
+            "AMP" -> com.example.data.model.Mk20Catalog.AMP_MODELS.map { it.name }
+            "CAB" -> com.example.data.model.Mk20Catalog.CAB_MODELS.map { it.name } + listOf("User IR / Bypass")
+            "EQ" -> com.example.data.model.Mk20Catalog.EQ_MODELS.map { it.name }
+            "MOD" -> com.example.data.model.Mk20Catalog.MOD_MODELS.map { it.name }
+            "DELAY" -> com.example.data.model.Mk20Catalog.DELAY_MODELS.map { it.name }
+            "REVERB" -> com.example.data.model.Mk20Catalog.REVERB_MODELS.map { it.name }
+            "VOL" -> listOf("Master", "Output Boost", "Linear Vol")
             else -> listOf(module.model)
         }
     }
@@ -226,6 +211,10 @@ fun PedalStompCard(
 
             Spacer(modifier = Modifier.height(10.dp))
 
+            val currentCatalogItem = remember(pedalKey, module.model) {
+                com.example.data.model.Mk20Catalog.findItem(pedalKey, module.model)
+            }
+
             // Model Selector Dropdown Chip
             Box(modifier = Modifier.fillMaxWidth()) {
                 Row(
@@ -239,14 +228,30 @@ fun PedalStompCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = module.model,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.SemiBold,
-                        color = if (module.active) TextPrimary else TextMuted,
-                        fontSize = 12.sp
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(
+                            text = module.model,
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = FontWeight.Bold,
+                            color = if (module.active) themeColor else TextMuted,
+                            fontSize = 12.sp
+                        )
+                        if (currentCatalogItem != null) {
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "• ${currentCatalogItem.description}",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = TextSecondary,
+                                fontSize = 11.sp,
+                                maxLines = 1,
+                                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                            )
+                        }
+                    }
                     Icon(
                         imageVector = Icons.Default.ArrowDropDown,
                         contentDescription = "Selecionar Modelo",
@@ -257,30 +262,87 @@ fun PedalStompCard(
                 DropdownMenu(
                     expanded = modelMenuExpanded,
                     onDismissRequest = { modelMenuExpanded = false },
-                    modifier = Modifier.background(Color(0xFF161B26))
+                    modifier = Modifier
+                        .background(Color(0xFF161B26))
+                        .heightIn(max = 420.dp)
                 ) {
                     availableModels.forEach { modelOption ->
+                        val catalogItem = com.example.data.model.Mk20Catalog.findItem(pedalKey, modelOption)
+                        val isSelected = modelOption == module.model
+
                         DropdownMenuItem(
                             text = {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Text(
-                                        text = modelOption,
-                                        color = if (modelOption == module.model) themeColor else TextPrimary,
-                                        fontFamily = FontFamily.Monospace,
-                                        fontSize = 12.sp,
-                                        fontWeight = if (modelOption == module.model) FontWeight.Bold else FontWeight.Normal
-                                    )
-                                    if (modelOption == module.model) {
-                                        Icon(
-                                            imageVector = Icons.Default.Check,
-                                            contentDescription = null,
-                                            tint = themeColor,
-                                            modifier = Modifier.size(16.dp)
+                                if (catalogItem != null) {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 3.dp)
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            Text(
+                                                text = catalogItem.name,
+                                                color = if (isSelected) themeColor else TextPrimary,
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 12.sp,
+                                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+                                            )
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Surface(
+                                                    shape = RoundedCornerShape(4.dp),
+                                                    color = themeColor.copy(alpha = 0.15f)
+                                                ) {
+                                                    Text(
+                                                        text = catalogItem.type,
+                                                        color = themeColor,
+                                                        fontSize = 9.sp,
+                                                        fontWeight = FontWeight.SemiBold,
+                                                        modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
+                                                    )
+                                                }
+                                                if (isSelected) {
+                                                    Spacer(modifier = Modifier.width(6.dp))
+                                                    Icon(
+                                                        imageVector = Icons.Default.Check,
+                                                        contentDescription = null,
+                                                        tint = themeColor,
+                                                        modifier = Modifier.size(14.dp)
+                                                    )
+                                                }
+                                            }
+                                        }
+                                        Text(
+                                            text = catalogItem.description,
+                                            color = TextSecondary,
+                                            fontSize = 11.sp,
+                                            maxLines = 1,
+                                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                                         )
+                                    }
+                                } else {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = modelOption,
+                                            color = if (isSelected) themeColor else TextPrimary,
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 12.sp,
+                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                                        )
+                                        if (isSelected) {
+                                            Icon(
+                                                imageVector = Icons.Default.Check,
+                                                contentDescription = null,
+                                                tint = themeColor,
+                                                modifier = Modifier.size(16.dp)
+                                            )
+                                        }
                                     }
                                 }
                             },
@@ -300,18 +362,106 @@ fun PedalStompCard(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
-                    maxItemsInEachRow = 3
+                    maxItemsInEachRow = if (module.params.size >= 4) 4 else 3
                 ) {
                     module.params.forEach { (paramName, paramVal) ->
-                        val isMs = paramName.equals("Time", ignoreCase = true)
-                        val maxRange = if (isMs) 1000f else 100f
-                        val unit = if (isMs) "ms" else "%"
+                        val isMs = paramName.equals("Time", ignoreCase = true) ||
+                            paramName.startsWith("Time ", ignoreCase = true)
+                        val isSyncBpm = paramName.equals("SyncBPM", ignoreCase = true) ||
+                            paramName.equals("Sync BPM", ignoreCase = true)
+                        val isToggle = paramName.equals("Sync", ignoreCase = true) ||
+                            paramName.equals("inputDetect", ignoreCase = true) ||
+                            paramName.equals("LPtype", ignoreCase = true) ||
+                            paramName.equals("boost", ignoreCase = true) ||
+                            (pedalKey == "DS" && module.model.equals("MW-XEP", ignoreCase = true) && paramName.equals("bright", ignoreCase = true))
+                        val isStep2 = (pedalKey == "DS" && !module.model.equals("MW-EQP", ignoreCase = true) && (paramName.equals("mode", ignoreCase = true) || paramName.equals("gate mode", ignoreCase = true))) ||
+                            (pedalKey == "MOD" && paramName.equals("stage", ignoreCase = true))
+                        val isStep3 = (pedalKey == "DS" && module.model.equals("MW-EQP", ignoreCase = true) && paramName.equals("mode", ignoreCase = true)) ||
+                            (pedalKey == "DS" && module.model.equals("MW-B7000", ignoreCase = true) && (
+                                paramName.equals("grunt", ignoreCase = true) ||
+                                paramName.equals("attack", ignoreCase = true) ||
+                                paramName.equals("lomid freq", ignoreCase = true) ||
+                                paramName.equals("himid freq", ignoreCase = true)
+                            ))
+                        val isStep6 = pedalKey == "DS" && module.model.equals("MW-HRZ", ignoreCase = true) && paramName.equals("attack", ignoreCase = true)
+                        val isModLfo5 = pedalKey == "MOD" && paramName.equals("lfo", ignoreCase = true)
+                        val isModChorusMode6 = pedalKey == "MOD" && module.model.equals("CHORUS STEREO", ignoreCase = true) && paramName.equals("mode", ignoreCase = true)
+                        val isModTremoloMode3 = pedalKey == "MOD" && module.model.equals("TREMOLO STEREO", ignoreCase = true) && paramName.equals("mode", ignoreCase = true)
+                        val isFxWhammyMode3 = pedalKey == "FX" && module.model.equals("Whammy", ignoreCase = true) && paramName.equals("mode", ignoreCase = true)
+                        val isModBits = pedalKey == "MOD" && paramName.equals("bits", ignoreCase = true)
+                        val isFxLofiBit = pedalKey == "FX" && paramName.equals("Bit", ignoreCase = true)
+                        val isFxHighPitch = pedalKey == "FX" && paramName.equals("High Pitch", ignoreCase = true)
+                        val isFxLowPitch = pedalKey == "FX" && paramName.equals("Low Pitch", ignoreCase = true)
+                        val isFxSemi = pedalKey == "FX" && paramName.equals("Semi", ignoreCase = true)
+                        val isFxDecimal10 = pedalKey == "FX" && (
+                            paramName.equals("Speed", ignoreCase = true) ||
+                            paramName.equals("Sense", ignoreCase = true) ||
+                            paramName.equals("Sustain", ignoreCase = true) ||
+                            paramName.equals("Ratio", ignoreCase = true) ||
+                            (paramName.equals("Gain", ignoreCase = true) && module.model.contains("Boost", ignoreCase = true))
+                        )
+                        val isModSpeed16 = pedalKey == "MOD" && paramName.equals("speed", ignoreCase = true) && (
+                            module.model.equals("PHASER STEREO", ignoreCase = true) ||
+                            module.model.equals("FLANGER STEREO", ignoreCase = true) ||
+                            module.model.equals("VIBE STEREO", ignoreCase = true)
+                        )
+                        val isModSpeed10 = pedalKey == "MOD" && paramName.equals("speed", ignoreCase = true) && !isModSpeed16
+                        val isEqBand = pedalKey == "EQ"
+                        val isDelayPitch = pedalKey == "DELAY" && paramName.equals("Pitch", ignoreCase = true)
+                        val isGateThd = (pedalKey == "NS" || pedalKey == "NR") &&
+                            paramName.equals("thd", ignoreCase = true) &&
+                            (module.model.contains("gate", ignoreCase = true) || paramVal < 0f)
+                        val isCabLowCut = pedalKey == "CAB" && paramName.equals("Low Cut", ignoreCase = true)
+                        val isCabHighCut = pedalKey == "CAB" && paramName.equals("High Cut", ignoreCase = true)
+
+                        val paramRange = when {
+                            isMs -> 100f..2000f
+                            isSyncBpm -> 40f..240f
+                            isToggle -> 0f..1f
+                            isStep2 -> 1f..2f
+                            isStep3 || isModTremoloMode3 || isFxWhammyMode3 -> 1f..3f
+                            isModLfo5 -> 1f..5f
+                            isStep6 || isModChorusMode6 -> 1f..6f
+                            isModBits -> 4f..24f
+                            isFxLofiBit -> 2f..24f
+                            isFxHighPitch -> 0f..24f
+                            isFxLowPitch -> -24f..0f
+                            isFxSemi -> -12f..12f
+                            isFxDecimal10 -> 0f..10f
+                            isModSpeed16 -> 0.17f..16f
+                            isModSpeed10 -> 0.1f..10f
+                            isEqBand -> -12f..12f
+                            isDelayPitch -> 0f..12f
+                            isGateThd -> -80f..-30f
+                            isCabLowCut -> 20f..300f
+                            isCabHighCut -> 5000f..18000f
+                            else -> 0f..100f
+                        }
+                        val unit = when {
+                            isMs -> "ms"
+                            isSyncBpm -> " BPM"
+                            isToggle -> "ON/OFF"
+                            isStep2 -> "/2"
+                            isStep3 -> "/3"
+                            isStep6 -> "/6"
+                            isModLfo5 -> "LFO_WAVE"
+                            isModChorusMode6 -> "CHORUS_MODE"
+                            isModTremoloMode3 -> "TREM_MODE"
+                            isFxWhammyMode3 -> "WHAMMY_MODE"
+                            isModBits || isFxLofiBit -> "bit"
+                            isFxHighPitch || isFxLowPitch || isFxSemi || isDelayPitch -> "st"
+                            isFxDecimal10 || isModSpeed16 || isModSpeed10 -> "DEC10"
+                            isEqBand -> "dB_EQ"
+                            isGateThd -> "dB"
+                            isCabLowCut || isCabHighCut -> "Hz"
+                            else -> "%"
+                        }
 
                         KnobControl(
                             label = paramName,
-                            value = paramVal,
+                            value = paramVal.coerceIn(paramRange.start, paramRange.endInclusive),
                             onValueChange = { newVal -> onParamChange(paramName, newVal) },
-                            range = 0f..maxRange,
+                            range = paramRange,
                             activeColor = if (module.active) themeColor else TextMuted,
                             unit = unit,
                             modifier = Modifier.weight(1f)

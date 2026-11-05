@@ -5,12 +5,31 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Base64
 import com.example.data.model.Mk20Preset
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONObject
+import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
+import java.util.concurrent.TimeUnit
+
+data class YouTubeVideoInfo(
+    val title: String,
+    val authorName: String,
+    val thumbnailUrl: String,
+    val videoId: String
+)
 
 object DeepLinkUtils {
     private const val SCHEME = "mk20"
     private const val HOST = "preset"
     private const val WEB_HOST = "https://mk20tone.app/preset"
+
+    private val httpClient = OkHttpClient.Builder()
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
+        .build()
 
     /**
      * Creates a shareable deep link URL for an MK-20 preset.
@@ -70,6 +89,51 @@ object DeepLinkUtils {
     }
 
     /**
+     * Fetches public YouTube video metadata (title, author, thumbnail) via YouTube oEmbed API.
+     * Does NOT require any YouTube API key!
+     */
+    suspend fun fetchYouTubeVideoInfo(url: String): YouTubeVideoInfo? = withContext(Dispatchers.IO) {
+        val videoId = extractYouTubeId(url) ?: return@withContext null
+        try {
+            val canonicalUrl = "https://www.youtube.com/watch?v=$videoId"
+            val encodedUrl = URLEncoder.encode(canonicalUrl, "UTF-8")
+            val request = Request.Builder()
+                .url("https://www.youtube.com/oembed?url=$encodedUrl&format=json")
+                .header("User-Agent", "Mozilla/5.0")
+                .get()
+                .build()
+
+            val response = httpClient.newCall(request).execute()
+            if (response.isSuccessful) {
+                val body = response.body?.string() ?: return@withContext null
+                val json = JSONObject(body)
+                val title = json.optString("title", "")
+                val author = json.optString("author_name", "")
+                val thumbnail = json.optString("thumbnail_url", "https://img.youtube.com/vi/$videoId/hqdefault.jpg")
+
+                if (title.isNotBlank()) {
+                    return@withContext YouTubeVideoInfo(
+                        title = title,
+                        authorName = author,
+                        thumbnailUrl = thumbnail,
+                        videoId = videoId
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            // Network failure or timeout
+        }
+
+        // Fallback with video ID and standard thumbnail
+        YouTubeVideoInfo(
+            title = "",
+            authorName = "YouTube",
+            thumbnailUrl = "https://img.youtube.com/vi/$videoId/hqdefault.jpg",
+            videoId = videoId
+        )
+    }
+
+    /**
      * Shares a preset using Android system share sheet.
      */
     fun sharePreset(context: Context, preset: Mk20Preset) {
@@ -81,7 +145,7 @@ object DeepLinkUtils {
             if (preset.youtubeLink.isNotBlank()) {
                 append("📺 YouTube: ${preset.youtubeLink}\n")
             }
-            append("\n📲 Abrir no MK-20 Tone Generator:\n$shareLink\n")
+            append("\n📲 Abrir no Preset20 AI:\n$shareLink\n")
             append("\nLink direto do app:\n$deepLink\n")
             append("\n--- JSON da Pedaleira ---\n")
             append(preset.toJsonString(indent = 2))

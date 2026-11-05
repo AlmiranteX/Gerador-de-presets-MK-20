@@ -1,0 +1,32 @@
+name: Compilar Executavel Windows (.EXE)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows-exe:
+    name: Gerar Preset20AI.exe (Windows Desktop)
+    runs-on: windows-latest
+
+    steps:
+      - name: Baixar codigo do projeto
+        uses: actions/checkout@v4
+
+      - name: Compilar Preset20AI.exe nativo para Windows
+        shell: cmd
+        run: |
+          C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /nologo /target:winexe /out:presetai20.exe /r:System.Windows.Forms.dll /r:System.Drawing.dll windows_exe\Preset20AI.cs
+
+      - name: Publicar Executavel Windows (presetai20.exe)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Preset20AI-Windows-EXE
+          path: presetai20.exe
+          if-no-files-found: error
+          retention-days: 30

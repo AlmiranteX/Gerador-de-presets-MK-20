@@ -10,76 +10,124 @@ import kotlinx.coroutines.withContext
 object Mk20ToneEngine {
 
     private const val SYSTEM_INSTRUCTION = """
-Você é o especialista mestre na pedaleira multi-efeitos M-VAVE MK-20 (Guitar & Bass Amp Modeler and Effects Processor).
-Sua missão é gerar presets estritamente precisos e musicais para guitarristas e baixistas.
+Você é o especialista mestre na pedaleira multi-efeitos M-VAVE / Yuimer MK-20 (Guitar Amp Modeler and Effects Processor).
+Sua missão é gerar presets estritamente precisos, musicais, equilibrados e fiéis ao timbre de cada música ou estilo solicitado para guitarra elétrica.
 Retorne APENAS um objeto JSON válido (sem blocos markdown ```json).
 
-Utilize os nomes e IDs oficiais do manual da MK-20:
+Utilize os nomes e IDs oficiais do catálogo de fábrica da MK-20:
 
 AMPLIFICADORES OFICIAIS (AMP):
-- Marshall JVM410H: "1CL1_410H" (Clean), "2CL2_410H" (Bright Clean), "3CR1_410H" (Light Crunch), "4CR2_410H" (Mid Crunch), "5CR3_410H" (Heavy Crunch), "6OD1_410H" (Classic OD), "7OD2_410H" (Modern OD), "8OD3_410H" (Thick OD), "33OD1_JVMcrunch", "34OD2_JVMcrunch"
+- Marshall JVM410H: "1CL1_410H" (Clean), "2CL2_410H" (Bright Clean), "3CR1_410H" (Light Crunch), "4CR2_410H" (Full Mid Crunch), "5CR3_410H" (Heavy Crunch), "6OD1_410H" (Classic OD), "7OD2_410H" (Modern OD), "8OD3_410H" (Thick Lead), "33OD1_JVMcrunch", "34OD2_JVMcrunch"
 - Fender 65 Deluxe Reverb: "13CL1_FenDi" (Classic Blackface), "14CL2_FenDi" (Bright Clean), "15CL3_FenDi" (Loose Vintage)
-- Roland JC-120 Jazz Chorus: "25CL1_JC120" (Ultra-clean solid state), "26CL2_JC120" (Chorus clean sonhador)
-- Marshall JCM800 2203: "51OD1_MS2203" (Brown Sound), "86OD_JCM800" (Classic British Crunch), "87DS_JCM800" (Traditional Heavy Metal)
+- Roland JC-120 Jazz Chorus: "25CL1_JC120" (Ultra-clean solid state), "26CL2_JC120" (Chorus clean lendário)
+- Marshall JCM800 2203: "51OD1_MS2203" (Brown Sound), "86OD_JCM800" (Classic British Crunch), "87DS_JCM800" (Heavy Metal Distortion)
 - Marshall JCM900: "19CL1_J900", "20CL2_J900", "21CL3_J900", "22OD1_J900", "23DS1_J900", "24DS2_J900"
-- Mesa Boogie: "48CH1_ME" (JP-2C Mark Tone), "49CH2_ME" (JP-2C Lead), "69OD1_meas" a "73CR1_meas" (Triple Rectifier)
-- ENGL Savage 120: "74OD_ENGL 120" (Speed Metal Overdrive), "75DS_ENGL 120" (Extreme Death/Black Metal Distortion)
-- Soldano SLO-100: "76CL_SoldSolo100" (Hi-End Clean), "77OD_SoldSolo100" (AOR Crunch), "78DS_SoldSolo100" (American High-Gain)
-- EVH 5150 / Peavey 6505: "79OD_5150III", "80DS_5150III", "88OD_Peavev6505", "89DS_Peavev6505"
+- Mesa Boogie JP-2C: "48CH1_ME" (Mark Crunch), "49CH2_ME" (Lead Solo)
+- Mesa Boogie Triple Rectifier: "69OD1_meas", "70OD2_meas", "71CL1_meas", "72CL2_meas", "73CR1_meas"
+- ENGL Savage 120: "74OD_ENGL_120" (Speed Metal OD), "75DS_ENGL_120" (Extreme High-Gain DS)
+- Soldano SLO-100: "76CL_SoldSolo100" (Hi-End Clean), "77OD_SoldSolo100" (AOR Crunch), "78DS_SoldSolo100" (American High-Gain DS)
+- EVH 5150: "79OD_5150III" (EVH Rhythm/Crunch), "80DS_5150III" (EVH Lead High-Gain)
 - VOX AC30: "81CL_VOSAC30" (British Class-A Clean), "82OD_VOSAC30" (Top Boost Sweet Breakup)
-- Diezel VH4: "83CL_DiezzlVH4", "84OD_DiezzlVH4", "85DS_DiezzlVH4" (Djent/Modern Metal)
-- Bogner XTC: "64DS1_XC", "65DS2_XC"
-- JHS "Loud Is More Good": "27OD1_JHS", "28OD2_JHS", "29OD3_JHS", "30DS_JHS"
-- BOSS Metal Zone: "18HVMetal _1"
-- Baixo (Bass Amps): "91AgB659_BS" (Aguilar DB659), "94Ap50_BS" (Darkglass Alpha Omega), "102ApSVT_BS" (Ampeg SVT), "103DgM900_BS" (Darkglass Microtubes), "113DgXu_BS" (Darkglass XUltra), "120GKL800_BS" (GK 800RB)
+- Diezel VH4: "83CL_DiezzIVH4" (German Clean), "84OD_DiezzIVH4" (Prog Metal OD), "85DS_DiezzIVH4" (Djent Modern DS)
+- Peavey 6505: "88OD_Peavey6505" (Metalcore OD), "89DS_Peavey6505" (Modern High-Gain DS)
+- Orange Rockerverb 100: "55CL1_orange"
+- Supro 1696RT Black Magick: "54CL1_SUPA"
+- Blackstar HT Metal 60: "50DS1_metal"
+- Bogner XTC Ecstasy: "64DS1_XC", "65DS2_XC"
+- Pro Co RAT (Amp sim): "56OD1_Piranha", "57OD1_RAT", "58OD2_RAT", "59DS1_RAT"
+- BOSS Metal Zone (Amp sim): "18HVMetal_1"
+- TC Electronic Dark Matter: "12DARK_MATTER1"
+- Danelectro Wasabi AX-1: "9OD_AXE1"
+- BOSS BD-2 Blues Driver (Amp sim): "10OD1_BLUE", "11OD2_BLUE"
+- Horizon Devices: "16HORIZON_1", "17HORIZON_2"
+- JHS Loud Is More Good: "27OD1_JHS", "28OD2_JHS", "29OD3_JHS", "30DS_JHS"
+- JOYO JF-01: "31OD1_JOYO"
+- Boss KTN-MINI-W: "32DS1_JR7W"
+- Kohle HM2 Singing Mids: "35DS1_Kohle", "36DS2_Kohle", "37KohleHM"
+- M-VAVE Custom: "38DS1_M-VAVE" a "47CL4_M-VAVE"
+- NUX Overdrive: "52OD1_NUX", "53OD2_NUX"
+- MPF Sounds Room: "60DS1_ROOM", "61DS2_ROOM", "62DS3_ROOM"
+- Wangs VT-18: "63CL_WANG"
+- YUIMER OD: "66CL1_yuimer", "67CL2_yuimer", "68OD1_yuimer"
+- IK Multimedia TONEX: "90DS1_TONE"
 
 GABINETES / IRS OFICIAIS (CAB):
-- 4x12: "1BogUber412A", "2BogUber412B", "3BogUber412C", "4BogUber412D", "5DizFL412A", "8EngXXL412", "9EvStright412", "33Mar60A412A", "36Mar60B412A", "46MbOS412A", "57MbTradS412B", "58OgPPC412A"
-- 2x12: "10FdTR65R212A", "11FdTR65R212B", "20FdTwRev212A", "21FdTwRev212B", "22Fman212A", "26HesModn212A", "48MbSD212A", "61RJ120azz212", "64VAC30TBC212", "66ZillCab212"
-- 1x12 / 1x10: "13FdDelux112A", "15FdDBface112", "16FdDTweed112", "17FdPrinc110A", "63VAC15ox112"
-- Acústicos: "71GisonHubird", "72LakewdDCP", "73TakmiENPU", "74TaylrOcE", "75YamhaFGX"
-- Baixo: "77AmpgSVT115", "78AmpgSVT410", "80AmpgSVT810", "82Bareface110", "83DgD210C210", "90GK410RB410B"
+- Guitarra 4x12: "1BogUber412A" (Bogner SM57), "2BogUber412B" (Bogner MD421), "5DizFL412A" (Diezel SM57), "8EngXXL412" (ENGL MD421), "9EvStright412" (EVH U87), "33Mar60A412A" (Marshall 1960A), "36Mar60B412A" (Marshall 1960B U87), "46MbOS412A" (Mesa OS SM57), "57MbTradS412B" (Mesa Traditional MD421), "58OgPPC412A" (Orange PPC412)
+- Guitarra 2x12: "10FdTR65R212A" (Fender Twin U87), "11FdTR65R212B" (Fender Twin SM57), "20FdTwRev212A", "22Fman212A" (Friedman SM57), "26HesModn212A" (Hesu Modern), "48MbSD212A" (Mesa 212), "61RJ120azz212" (Roland JC-120), "64VAC30TBC212" (Vox AC30 TopBoost), "66ZillCab212" (Zilla 212)
+- Guitarra 1x12 / 1x10: "13FdDelux112A" (Fender Deluxe SM57), "15FdDBface112" (Fender Blackface U87), "16FdDTweed112", "17FdPrinc110A" (Princeton 110), "63VAC15ox112" (Vox AC15)
 
-PEDAIS DE DRIVE / BOOST / DISTORÇÃO OFICIAIS (DS):
-- "1BLUES_OD" (BOSS BD-2 Blues Driver)
-- "2TS8" (Ibanez TS808 Tube Screamer)
-- "3DS1" (BOSS DS-1)
-- "4DS2" (BOSS DS-2 Turbo)
-- "7M-VAVE_TS1" (M-VAVE TS808)
-- "8M-VAVE_TS2" (M-VAVE TS9)
-- "9SUPA_1", "10SUPA_2" (Xotic EP Booster)
-- "11RAT", "12RAT_BT" (Pro Co RAT 2)
-- "13JHS_1" (JHS Morning Glory)
-- "14JHS_2" (JHS Angry Charlie V3)
-- "15MT_1", "16MT_2" (BOSS MT-2 Metal Zone)
-- "20HIGAIN" (Friedman BE-OD)
-- "22TS-9" (Ibanez TS9)
-- "23BIG-DR", "39BIG-MUFF" (Electro-Harmonix Big Muff Pi)
-- "24CL_BOOST" (Clean Boost transparente)
-- "31BOG_DS" (Bogner Uberschall DS)
-- "36SuperOD" (Maxon Super OD-9)
-- "37BLUES_DR" (Fender Blues Deluxe Amp Sim OD)
+PEDAIS DE DRIVE / DISTORÇÃO / BOOST (DS / MW):
+- Modelos 01 a 12 (Controles Específicos):
+  * 01 "MW-808" (Tube Screamer TS-808): "gain" (0), "tone" (50), "level" (100)
+  * 02 "MW-GOLD" (Klon Centaur): "gain" (50), "tone" (50), "level" (70)
+  * 03 "MW-OCD" (Fulltone OCD): "gain" (0), "tone" (50), "LPtype" (0=off, 1=on), "mode" (1..2, padrão 2), "level" (100)
+  * 04 "MW-SD1" (Super Overdrive Boss SD-1): "gain" (0), "tone" (50), "level" (100)
+  * 05 "MW-DS1" (Distortion Clássica Boss DS-1): "gain" (0), "tone" (50), "level" (100)
+  * 06 "MW-RAT" (ProCo Rat): "gain" (0), "filter" (50), "level" (100)
+  * 07 "MW-XEP" (Xotic EP Booster): "gain" (0), "boost" (0=off, 1=on), "bright" (0=off, 1=on)
+  * 08 "MW-FACE" (Fuzz Face Vintage): "fuzz" (90), "level" (100)
+  * 09 "MW-HRZ" (High-Gain com Gate): "gain" (20), "attack" (1..6, padrão 1), "bright" (100), "gate" (0), "gate mode" (1..2, padrão 1), "level" (100)
+  * 10 "MW-EQP" (Overdrive Paramétrico): "gain" (0), "tone" (50), "level" (100), "mode" (1..2, padrão 1)
+  * 11 "MW-MUFF" (Big Muff Pi Fuzz): "sustain" (80), "tone" (50), "level" (100)
+- Modelos 13 a 52 com Equalização de 8 Parâmetros ("gain": 50, "level": 50, "bass": 50, "middle": 50, "treble": 50, "reso": 0, "pres": 50, "bright": 100):
+  * "1._ADAM_RAFOW", "2TS8", "3DS1", "4DS2", "5M-VAVE_OD", "6M-VAVE_DS", "7M-VAVE_TS1", "8M-VAVE_TS2", "9SUPA_1", "10SUPA_2", "11RAT", "12RAT_BT", "13JHS_1", "14JHS_2", "15MT_1", "16MT_2", "17TDS", "18XC_DS", "19QC_DS", "20HIGAIN", "21M-BOOSTER", "22TS-9", "23BIG-DR", "24CL_BOOST", "25BD", "26M90S", "27M2000", "28DS800", "29DS900", "30MAR-DS", "31BOG_DS", "32SONDO", "33MID-BOST", "34RED_DS", "35MODEN_DS", "36SUPEROD", "37BLUES_DR", "38BLACK-BOX", "39BIG-MUFF", "SLASH_USE_YOU"
 
-MODULAÇÃO (MOD): "Dimensional Chorus", "Vintage Flanger", "Phase 90", "Optical Tremolo", "Uni-Vibe"
-DELAY: "Analog Delay", "Digital Delay", "Tape Echo", "Dotted Eighth", "Ping Pong"
-REVERB: "Plate Reverb", "Shimmer Reverb", "Hall Reverb", "Spring 63", "Room Reverb"
-NOISE GATE (NR): "Noise Gate" com parâmetros "Thresh" (0-100) e "Decay" (0-100)
+PRÉ-EFEITOS E DINÂMICA OFICIAIS (FX):
+- Compressores: "Compress" (Stompbox), "Compress Pro" (Studio Comp), "F Compress" (Optical Tone Comp)
+- Boosters: "Boost" (Clean Boost), "A Boost" (3-Band RC Preamp), "Boost ED" (EP-3 Vintage Pre), "E Boost" (Preamp Boost), "B Boost" (BB Preamp)
+- Wahs & Filtros: "Wah-Wah", "Sense-Wah" (Envelope Filter), "Cry-Wah", "Funk-Wah", "Slide-Wah", "X-Wah"
+- Pitch & Sintetizadores: "Whammy", "Pitch", "Pitch shifter", "Octave", "Ring", "Lofi"
+
+MODULAÇÃO OFICIAL (MOD):
+- "CHORUS", "TRI CHORUS", "FLANGER", "TRI FLANGER", "TREMOLO", "TRI TREMOLO", "OPTO TREMOLO", "PHASER", "VIBRATO", "TRI VIBRATO", "OPTO VIBRATO", "UNIVIBE", "TRI UNIVIBE", "AUTOFILTER", "PHASER STEREO", "FLANGER STEREO", "VIBE STEREO", "CHORUS STEREO", "TREMOLO STEREO", "VIBRATO STEREO"
+
+DELAY OFICIAL (DELAY):
+- "Clean", "Echo", "Analog", "PingPong Stereo", "Clean Stereo", "Echo Stereo", "Analog Stereo", "Modern", "Reverse", "Duck", "Dtype", "Lofi", "Tremolo", "Pattern", "Filter", "Dual", "Ice"
+
+REVERB OFICIAL (REVERB):
+- "room", "hall", "plate", "room stereo", "hall stereo", "plate stereo", "spring", "spring stereo", "shimmer", "shimmer stereo", "bloom", "cloud", "lofi", "swell"
+
+EQUALIZADOR PÓS-GABINETE (EQ):
+- "Guitar EQ 6": "100Hz", "200Hz", "400Hz", "800Hz", "1.6kHz", "3.2kHz"
+
+NOISE SUPPRESSOR (NS):
+- "ai gate", "ai ms gate", "soft gate", "hard gate", "pro gate", "compress", "compress pro", "f compress"
+
+DIRETRIZES DE MATRIZES OFICIAIS TRAVADAS + PESQUISA REAL (GOOGLE SEARCH GROUNDING):
+1. PESQUISA DO EQUIPAMENTO REAL DA MÚSICA:
+   - Identifique o artista, o guitarrista da gravação original, o BPM oficial da música e os equipamentos reais (guitarra, amplificador, overdrive, modulação e delay).
+2. SELEÇÃO DA MATRIZ OFICIAL MK-20:
+   - Escolha a Matriz Oficial correspondente no campo "style":
+     * "Gospel Rock / Melodic Solo" (GOSPEL_MELODIC_SOLO: Solos cantantes, Voz da Verdade, O Escudo, Oficina G3, Solos Melódicos)
+     * "Worship / Ambient" (WORSHIP_AMBIENT: Louvor moderno, Hillsong, Elevation, Shimmer & Delay pontuado)
+     * "Studio Clean / Pop / Funk" (CLEAN_CRYSTAL: Clean cristalino, Pop, Funk, MPB)
+     * "British Rock / Crunch" (CLASSIC_CRUNCH: Classic Rock, Crunch britânico dinâmico)
+     * "Texas Blues / Overdrive" (TEXAS_BLUES: Blues, SRV, John Mayer)
+     * "Alternative Rock / Post-Grunge" (MODERN_ROCK_ALTERNATIVE: 30 Seconds to Mars, Foo Fighters, Arena Rock)
+     * "Epic Lead / Progressive Solo" (EPIC_GILMOUR_LEAD: Pink Floyd, David Gilmour, Sustain progressivo)
+     * "Modern High Gain / Metal" (HIGH_GAIN_METAL: Heavy Metal, Thrash, Djent)
+3. CALIBRAÇÃO ACÚSTICA OFICIAL DE PALCO E ESTÚDIO:
+   - Volume Geral encorpado (Master Volume 64..65, AMP Level 78, CAB Level 84..85).
+   - Noise Gate transparente (soft gate thd -52dB em solos/drives; -58dB em clean) que nunca engole o sustain.
+   - Brilho aberto e natural: Bright Switch ativo (65..72) e CAB High Cut aberto (7600Hz a 8000Hz).
 
 Formato JSON esperado:
 {
   "title": "Nome do Preset",
-  "style": "Estilo",
-  "bpm": 120,
+  "style": "Gospel Rock / Melodic Solo",
+  "bpm": 132,
   "youtube_link": "https://...",
-  "details": "Explicação técnica do timbre",
+  "details": "Explicação técnica do equipamento real usado na gravação e ajustes aplicados na Matriz Oficial",
   "pedals": {
-    "NR": { "name": "Noise Gate", "active": true, "model": "Noise Gate", "params": { "Thresh": 30, "Decay": 50 } },
-    "DS": { "name": "Drive / Boost", "active": true, "model": "1BLUES_OD", "params": { "Gain": 30, "Tone": 50, "Level": 60 } },
-    "AMP": { "name": "Amplificador", "active": true, "model": "26CL2_JC120", "params": { "Gain": 35, "Bass": 50, "Mid": 60, "Treble": 65, "Volume": 70 } },
-    "CAB": { "name": "Caixa / IR", "active": true, "model": "20FdTwRev212A", "params": { "Volume": 80 } },
-    "MOD": { "name": "Modulação", "active": true, "model": "Dimensional Chorus", "params": { "Speed": 30, "Depth": 50, "Mix": 35 } },
-    "DELAY": { "name": "Delay", "active": true, "model": "Analog Delay", "params": { "Time": 340, "Repeats": 35, "Mix": 30 } },
-    "REVERB": { "name": "Reverb", "active": true, "model": "Plate Reverb", "params": { "Decay": 50, "Tone": 55, "Mix": 35 } }
+    "FX": { "name": "Pré-Efeito / Dinâmica", "active": true, "model": "Compress", "params": { "Sustain": 4.5, "Attack": 48, "Level": 68, "Blend": 55 } },
+    "NS": { "name": "Noise Suppressor", "active": true, "model": "soft gate", "params": { "thd": -52, "inputDetect": 0 } },
+    "DS": { "name": "Drive / Boost", "active": true, "model": "MW-808", "params": { "gain": 20, "tone": 56, "level": 90 } },
+    "AMP": { "name": "Amplificador", "active": true, "model": "86OD_JCM800", "params": { "Gain": 58, "Level": 78, "Bass": 54, "Middle": 66, "Treble": 66, "Reso": 56, "Pres": 62, "Bright": 68 } },
+    "CAB": { "name": "Caixa / IR", "active": true, "model": "33Mar60A412A", "params": { "Level": 85, "Low Cut": 78, "High Cut": 7800 } },
+    "EQ": { "name": "Equalizador", "active": true, "model": "Guitar EQ 6", "params": { "100Hz": 1, "200Hz": 0, "400Hz": -1, "800Hz": 2, "1.6kHz": 2, "3.2kHz": 2 } },
+    "MOD": { "name": "Modulação", "active": false, "model": "CHORUS", "params": { "speed": 1.0, "depth": 38, "mix": 28, "sync": 0, "syncBpm": 132 } },
+    "DELAY": { "name": "Delay", "active": true, "model": "Analog", "params": { "Time": 360, "Fb": 28, "Mix": 22, "Sync": 0, "SyncBPM": 132 } },
+    "REVERB": { "name": "Reverb", "active": true, "model": "plate", "params": { "decay": 24, "mix": 18, "highPass" : 80, "lowPass": 80, "modDepth": 10 } }
   }
 }
 """
@@ -88,6 +136,73 @@ Formato JSON esperado:
         songOrStyle: String,
         youtubeUrl: String,
         details: String,
+        customApiKey: String?
+    ): Result<Mk20Preset> = withContext(Dispatchers.IO) {
+        // 1. Verifica primeiro se a música já possui Matriz Master dedicada na biblioteca de referência
+        val masterMatch = com.example.data.model.Mk20MasterSongDatabase.findBestMatch("$songOrStyle $youtubeUrl")
+        if (masterMatch != null && details.isBlank()) {
+            val matched = masterMatch.copy(
+                title = if (songOrStyle.isNotBlank()) songOrStyle.trim() else masterMatch.title,
+                youtubeLink = if (youtubeUrl.isNotBlank()) youtubeUrl else masterMatch.youtubeLink
+            )
+            return@withContext Result.success(com.example.util.AcousticStudioGuardrail.sanitize(matched))
+        }
+
+        val apiKey = when {
+            !customApiKey.isNullOrBlank() -> customApiKey
+            BuildConfig.GEMINI_API_KEY.isNotBlank() && BuildConfig.GEMINI_API_KEY != "MY_GEMINI_API_KEY" -> BuildConfig.GEMINI_API_KEY
+            else -> null
+        }
+
+        if (apiKey != null) {
+            try {
+                val selectedMatrix = com.example.data.model.Mk20OfficialToneMatrix.selectBestMatrix(songOrStyle, details)
+                val userPrompt = """
+Pesquise as especificações reais desta música/artista (BPM oficial da gravação, guitarrista, amplificador e efeitos usados) e gere o preset oficial para a pedaleira M-VAVE MK-20 ancorado na ${selectedMatrix.displayName}:
+Música / Estilo: $songOrStyle
+Link do YouTube: $youtubeUrl
+Detalhes e preferências do timbre: $details
+
+IMPORTANTE:
+- Mantenha a espinha dorsal acústica da Matriz Oficial (${selectedMatrix.description}) com volume cheio, brilho aberto e sustain natural.
+- Ajuste o BPM real da faixa, o tempo do Delay e os detalhes finos da música.
+- O campo 'title' do JSON gerado DEVE ser exatamente: "$songOrStyle".
+Retorne SOMENTE o objeto JSON conforme a especificação.
+""".trimIndent()
+
+                val response = GeminiClient.generateWithSearchGrounding(
+                    apiKey = apiKey,
+                    contents = listOf(Content(parts = listOf(Part(text = userPrompt)))),
+                    systemInstruction = Content(parts = listOf(Part(text = SYSTEM_INSTRUCTION)))
+                )
+                val rawText = response.candidates?.firstOrNull()?.content?.parts?.firstOrNull()?.text
+                if (!rawText.isNullOrBlank()) {
+                    val cleanJson = cleanJsonString(rawText)
+                    val preset = Mk20Preset.fromJsonString(cleanJson)
+                    val titledPreset = if (songOrStyle.isNotBlank()) preset.copy(title = songOrStyle.trim()) else preset
+                    // Ancora o preset da IA na Matriz Oficial Travada da MK-20 + Guardião de Estúdio
+                    val matrixLocked = com.example.data.model.Mk20OfficialToneMatrix.lockToOfficialMatrix(
+                        aiPreset = titledPreset,
+                        songOrStyle = songOrStyle,
+                        details = details
+                    )
+                    val sanitized = com.example.util.AcousticStudioGuardrail.sanitize(matrixLocked)
+                    return@withContext Result.success(sanitized)
+                }
+            } catch (e: Exception) {
+                // If API call fails, fall back to authentic local engine
+            }
+        }
+
+        // Intelligent local tone synthesizer based on Official MK-20 Hardware Matrices
+        val syntheticPreset = synthesizePresetLocally(songOrStyle, youtubeUrl, details)
+        val finalSynthetic = if (songOrStyle.isNotBlank()) syntheticPreset.copy(title = songOrStyle.trim()) else syntheticPreset
+        val sanitized = com.example.util.AcousticStudioGuardrail.sanitize(finalSynthetic)
+        Result.success(sanitized)
+    }
+
+    suspend fun generatePresetFromAudio(
+        vibeAnalysis: com.example.util.AudioVibeAnalysis,
         customApiKey: String?
     ): Result<Mk20Preset> = withContext(Dispatchers.IO) {
         val apiKey = when {
@@ -99,36 +214,125 @@ Formato JSON esperado:
         if (apiKey != null) {
             try {
                 val userPrompt = """
-Gere o preset profissional oficial da pedaleira M-VAVE MK-20:
-Música / Estilo: $songOrStyle
-Link do YouTube: $youtubeUrl
-Detalhes e preferências do timbre: $details
+Gere o preset profissional oficial da pedaleira M-VAVE MK-20 analisando esta gravação de áudio e as características acústicas capturadas pelo microfone:
+- Estilo detectado: ${vibeAnalysis.detectedStyle}
+- Nível de Ganho / Vibe: ${vibeAnalysis.gainVibe}
+- BPM Estimado: ${vibeAnalysis.estimatedBpm}
+- Energia RMS: ${vibeAnalysis.rmsEnergy}
+- Relação de Agudos: ${vibeAnalysis.highFreqRatio}
+- Detalhes Acústicos: ${vibeAnalysis.details}
+- Título sugerido para o preset: ${vibeAnalysis.title}
 
-Retorne SOMENTE o objeto JSON conforme a especificação.
+IMPORTANTE: O campo 'title' do JSON gerado DEVE ser: "${vibeAnalysis.title}".
+Retorne SOMENTE o objeto JSON conforme a especificação do sistema da MK-20, mantendo uma equalização e ambiência musical e balanceada.
 """.trimIndent()
 
-                val request = GenerateContentRequest(
-                    contents = listOf(
-                        Content(parts = listOf(Part(text = userPrompt)))
-                    ),
+                val parts = mutableListOf<Part>()
+                if (vibeAnalysis.base64Wav.isNotBlank()) {
+                    parts.add(Part(inlineData = InlineData(mimeType = "audio/wav", data = vibeAnalysis.base64Wav)))
+                }
+                parts.add(Part(text = userPrompt))
+
+                val response = GeminiClient.generateWithSearchGrounding(
+                    apiKey = apiKey,
+                    contents = listOf(Content(parts = parts)),
                     systemInstruction = Content(parts = listOf(Part(text = SYSTEM_INSTRUCTION)))
                 )
-
-                val response = GeminiClient.service.generateContent(apiKey, request)
                 val rawText = response.candidates?.firstOrNull()?.content?.parts?.firstOrNull()?.text
                 if (!rawText.isNullOrBlank()) {
                     val cleanJson = cleanJsonString(rawText)
                     val preset = Mk20Preset.fromJsonString(cleanJson)
-                    return@withContext Result.success(preset)
+                    val finalPreset = preset.copy(
+                        title = vibeAnalysis.title.ifBlank { preset.title }
+                    )
+                    val matrixLocked = com.example.data.model.Mk20OfficialToneMatrix.lockToOfficialMatrix(
+                        aiPreset = finalPreset,
+                        songOrStyle = vibeAnalysis.detectedStyle,
+                        details = vibeAnalysis.details
+                    )
+                    val sanitized = com.example.util.AcousticStudioGuardrail.sanitize(matrixLocked)
+                    return@withContext Result.success(sanitized)
                 }
             } catch (e: Exception) {
-                // If API call fails, fall back to our authentic local engine
+                // If API call fails, fall back to high precision acoustic mapping below
             }
         }
 
-        // Intelligent local tone synthesizer based on authentic MK-20 manual specs
-        val syntheticPreset = synthesizePresetLocally(songOrStyle, youtubeUrl, details)
-        Result.success(syntheticPreset)
+        // Direct high-fidelity preset construction from acoustic analysis
+        val rawPreset = synthesizeFromAcousticVibe(vibeAnalysis)
+        val sanitized = com.example.util.AcousticStudioGuardrail.sanitize(rawPreset)
+        Result.success(sanitized)
+    }
+
+    private fun synthesizeFromAcousticVibe(vibe: com.example.util.AudioVibeAnalysis): Mk20Preset {
+        val title = vibe.title.ifBlank { "MK-20 Mic Tone" }
+        val modModel = com.example.data.model.Mk20Catalog.findMod(vibe.suggestedMod)?.name ?: "CHORUS"
+        val dlyModel = com.example.data.model.Mk20Catalog.findDelay(vibe.suggestedDelay)?.name ?: "Analog"
+        val revModel = com.example.data.model.Mk20Catalog.findReverb(vibe.suggestedReverb)?.name ?: "plate"
+        val dsModel = com.example.data.model.Mk20Catalog.findDs(vibe.suggestedDrive)?.name ?: "MW-808"
+
+        return Mk20Preset(
+            title = title,
+            style = vibe.detectedStyle,
+            bpm = vibe.estimatedBpm,
+            youtubeLink = "",
+            details = vibe.details,
+            pedals = Mk20Pedals(
+                NS = PedalModule(
+                    name = "Noise Suppressor",
+                    active = vibe.noiseGateActive,
+                    model = if (vibe.noiseGateActive && vibe.detectedStyle.contains("Metal", ignoreCase = true)) "ai ms gate" else "soft gate",
+                    params = if (vibe.noiseGateActive && vibe.detectedStyle.contains("Metal", ignoreCase = true)) {
+                        mapOf("gate" to 50f, "bias" to 50f, "inputDetect" to 0f)
+                    } else {
+                        mapOf("thd" to -60f, "inputDetect" to 0f)
+                    }
+                ),
+                DS = PedalModule(
+                    name = "Drive / Boost",
+                    active = true,
+                    model = dsModel,
+                    params = com.example.data.model.Mk20Catalog.getDefaultDsParams(dsModel)
+                ),
+                AMP = PedalModule(
+                    name = "Amplificador",
+                    active = true,
+                    model = vibe.suggestedAmp,
+                    params = com.example.data.model.Mk20Catalog.getDefaultAmpParams(vibe.suggestedAmp)
+                ),
+                CAB = PedalModule(
+                    name = "Caixa / IR",
+                    active = true,
+                    model = vibe.suggestedCab,
+                    params = com.example.data.model.Mk20Catalog.getDefaultCabParams(vibe.suggestedCab)
+                ),
+                MOD = PedalModule(
+                    name = "Modulação",
+                    active = vibe.suggestedMod != "None",
+                    model = modModel,
+                    params = com.example.data.model.Mk20Catalog.getDefaultModParams(modModel)
+                ),
+                DELAY = PedalModule(
+                    name = "Delay",
+                    active = true,
+                    model = dlyModel,
+                    params = com.example.data.model.Mk20Catalog.getDefaultDelayParams(dlyModel).toMutableMap().apply {
+                        put("Time", (60000f / vibe.estimatedBpm.toFloat() * 0.75f).coerceIn(200f, 500f))
+                        put("Mix", 22f)
+                        put("Fb", 25f)
+                    }
+                ),
+                REVERB = PedalModule(
+                    name = "Reverb",
+                    active = true,
+                    model = revModel,
+                    params = com.example.data.model.Mk20Catalog.getDefaultReverbParams(revModel).toMutableMap().apply {
+                        put("mix", 18f)
+                        put("decay", 22f)
+                    }
+                )
+            )
+        )
     }
 
     private fun cleanJsonString(raw: String): String {
@@ -137,119 +341,37 @@ Retorne SOMENTE o objeto JSON conforme a especificação.
             .trim()
     }
 
-    fun synthesizePresetLocally(songOrStyle: String, youtubeUrl: String, details: String): Mk20Preset {
-        val combined = "$songOrStyle $details".lowercase()
+    fun synthesizePresetLocally(
+        songOrStyle: String,
+        youtubeUrl: String,
+        details: String
+    ): Mk20Preset {
         val title = if (songOrStyle.isNotBlank()) songOrStyle.replaceFirstChar { it.uppercase() } else "MK-20 Custom Tone"
 
-        return when {
-            combined.contains("bass") || combined.contains("baixo") -> {
-                Mk20Preset(
-                    title = title,
-                    style = "Bass / Groove",
-                    bpm = 105,
-                    youtubeLink = youtubeUrl,
-                    details = details.ifBlank { "Timbre de contrabaixo definido e encorpado com Ampeg SVT e compressão na medida." },
-                    pedals = Mk20Pedals(
-                        NR = PedalModule("Noise Gate", true, "Noise Gate", mapOf("Thresh" to 20f, "Decay" to 50f)),
-                        DS = PedalModule("Drive / Boost", false, "9SUPA_1", mapOf("Gain" to 20f, "Tone" to 50f, "Level" to 70f)),
-                        AMP = PedalModule("Amplificador", true, "102ApSVT_BS", mapOf("Gain" to 45f, "Bass" to 65f, "Mid" to 55f, "Treble" to 50f, "Volume" to 80f)),
-                        CAB = PedalModule("Caixa / IR", true, "80AmpgSVT810", mapOf("Volume" to 85f)),
-                        MOD = PedalModule("Modulação", false, "Dimensional Chorus", mapOf("Speed" to 20f, "Depth" to 30f, "Mix" to 20f)),
-                        DELAY = PedalModule("Delay", false, "Analog Delay", mapOf("Time" to 200f, "Repeats" to 15f, "Mix" to 10f)),
-                        REVERB = PedalModule("Reverb", true, "Room Reverb", mapOf("Decay" to 20f, "Tone" to 40f, "Mix" to 15f))
-                    )
-                )
-            }
-            combined.contains("worship") || combined.contains("gospel") || combined.contains("elevation") || combined.contains("jesus") -> {
-                Mk20Preset(
-                    title = title,
-                    style = "Worship / Ambient",
-                    bpm = 110,
-                    youtubeLink = youtubeUrl,
-                    details = details.ifBlank { "Clean Roland JC-120 com BD-2 Blues Driver suave, delay colcheia pontuada e shimmer exuberante." },
-                    pedals = Mk20Pedals(
-                        NR = PedalModule("Noise Gate", true, "Noise Gate", mapOf("Thresh" to 25f, "Decay" to 55f)),
-                        DS = PedalModule("Drive / Boost", true, "1BLUES_OD", mapOf("Gain" to 28f, "Tone" to 52f, "Level" to 62f)),
-                        AMP = PedalModule("Amplificador", true, "26CL2_JC120", mapOf("Gain" to 32f, "Bass" to 46f, "Mid" to 60f, "Treble" to 68f, "Volume" to 70f)),
-                        CAB = PedalModule("Caixa / IR", true, "20FdTwRev212A", mapOf("Volume" to 82f)),
-                        MOD = PedalModule("Modulação", true, "Dimensional Chorus", mapOf("Speed" to 28f, "Depth" to 48f, "Mix" to 35f)),
-                        DELAY = PedalModule("Delay", true, "Analog Delay", mapOf("Time" to 340f, "Repeats" to 40f, "Mix" to 34f)),
-                        REVERB = PedalModule("Reverb", true, "Shimmer Reverb", mapOf("Decay" to 65f, "Tone" to 58f, "Mix" to 42f))
-                    )
-                )
-            }
-            combined.contains("metal") || combined.contains("heavy") || combined.contains("djent") || combined.contains("chug") || combined.contains("metallica") || combined.contains("slipknot") -> {
-                Mk20Preset(
-                    title = title,
-                    style = "Modern High Gain / Metal",
-                    bpm = 135,
-                    youtubeLink = youtubeUrl,
-                    details = details.ifBlank { "ENGL Savage 120 com boost TS8, graves apertados na Mesa Boogie 4x12 e Noise Gate rápido." },
-                    pedals = Mk20Pedals(
-                        NR = PedalModule("Noise Gate", true, "Noise Gate", mapOf("Thresh" to 65f, "Decay" to 25f)),
-                        DS = PedalModule("Drive / Boost", true, "2TS8", mapOf("Gain" to 15f, "Tone" to 75f, "Level" to 85f)),
-                        AMP = PedalModule("Amplificador", true, "75DS_ENGL 120", mapOf("Gain" to 78f, "Bass" to 48f, "Mid" to 68f, "Treble" to 66f, "Volume" to 72f)),
-                        CAB = PedalModule("Caixa / IR", true, "57MbTradS412B", mapOf("Volume" to 85f)),
-                        MOD = PedalModule("Modulação", false, "Phase 90", mapOf("Speed" to 35f, "Depth" to 50f, "Mix" to 30f)),
-                        DELAY = PedalModule("Delay", true, "Digital Delay", mapOf("Time" to 380f, "Repeats" to 25f, "Mix" to 22f)),
-                        REVERB = PedalModule("Reverb", true, "Room Reverb", mapOf("Decay" to 28f, "Tone" to 45f, "Mix" to 18f))
-                    )
-                )
-            }
-            combined.contains("blues") || combined.contains("srv") || combined.contains("mayer") || combined.contains("bb king") -> {
-                Mk20Preset(
-                    title = title,
-                    style = "Texas Blues / Overdrive",
-                    bpm = 112,
-                    youtubeLink = youtubeUrl,
-                    details = details.ifBlank { "Fender Deluxe Reverb com Tube Screamer empurrando para saturação valvulada clássica." },
-                    pedals = Mk20Pedals(
-                        NR = PedalModule("Noise Gate", false, "Noise Gate", mapOf("Thresh" to 20f, "Decay" to 40f)),
-                        DS = PedalModule("Drive / Boost", true, "2TS8", mapOf("Gain" to 38f, "Tone" to 62f, "Level" to 72f)),
-                        AMP = PedalModule("Amplificador", true, "13CL1_FenDi", mapOf("Gain" to 54f, "Bass" to 58f, "Mid" to 64f, "Treble" to 68f, "Volume" to 74f)),
-                        CAB = PedalModule("Caixa / IR", true, "11FdTR65R212B", mapOf("Volume" to 80f)),
-                        MOD = PedalModule("Modulação", false, "Optical Tremolo", mapOf("Speed" to 45f, "Depth" to 50f, "Mix" to 30f)),
-                        DELAY = PedalModule("Delay", false, "Analog Delay", mapOf("Time" to 220f, "Repeats" to 22f, "Mix" to 18f)),
-                        REVERB = PedalModule("Reverb", true, "Spring 63", mapOf("Decay" to 48f, "Tone" to 58f, "Mix" to 36f))
-                    )
-                )
-            }
-            combined.contains("pink floyd") || combined.contains("gilmour") || combined.contains("numb") || combined.contains("solo") -> {
-                Mk20Preset(
-                    title = title,
-                    style = "Epic Lead / Solo",
-                    bpm = 125,
-                    youtubeLink = youtubeUrl,
-                    details = details.ifBlank { "Marshall JCM800 com Big Muff Pi, Tape Echo longo e modulação estéreo aberta." },
-                    pedals = Mk20Pedals(
-                        NR = PedalModule("Noise Gate", true, "Noise Gate", mapOf("Thresh" to 35f, "Decay" to 50f)),
-                        DS = PedalModule("Drive / Boost", true, "23BIG-DR", mapOf("Gain" to 68f, "Tone" to 52f, "Level" to 65f)),
-                        AMP = PedalModule("Amplificador", true, "86OD_JCM800", mapOf("Gain" to 62f, "Bass" to 52f, "Mid" to 68f, "Treble" to 64f, "Volume" to 75f)),
-                        CAB = PedalModule("Caixa / IR", true, "36Mar60B412A", mapOf("Volume" to 82f)),
-                        MOD = PedalModule("Modulação", true, "Vintage Flanger", mapOf("Speed" to 24f, "Depth" to 55f, "Mix" to 35f)),
-                        DELAY = PedalModule("Delay", true, "Tape Echo", mapOf("Time" to 440f, "Repeats" to 42f, "Mix" to 35f)),
-                        REVERB = PedalModule("Reverb", true, "Hall Reverb", mapOf("Decay" to 60f, "Tone" to 52f, "Mix" to 35f))
-                    )
-                )
-            }
-            else -> {
-                Mk20Preset(
-                    title = title,
-                    style = "British Rock / Versátil",
-                    bpm = 120,
-                    youtubeLink = youtubeUrl,
-                    details = details.ifBlank { "Marshall JVM410H com Blues Driver suave, dinâmico para ritmo e solo." },
-                    pedals = Mk20Pedals(
-                        NR = PedalModule("Noise Gate", true, "Noise Gate", mapOf("Thresh" to 30f, "Decay" to 45f)),
-                        DS = PedalModule("Drive / Boost", true, "1BLUES_OD", mapOf("Gain" to 35f, "Tone" to 55f, "Level" to 60f)),
-                        AMP = PedalModule("Amplificador", true, "4CR2_410H", mapOf("Gain" to 55f, "Bass" to 52f, "Mid" to 62f, "Treble" to 65f, "Volume" to 72f)),
-                        CAB = PedalModule("Caixa / IR", true, "16FdDTweed112", mapOf("Volume" to 80f)),
-                        MOD = PedalModule("Modulação", true, "Dimensional Chorus", mapOf("Speed" to 28f, "Depth" to 45f, "Mix" to 30f)),
-                        DELAY = PedalModule("Delay", true, "Analog Delay", mapOf("Time" to 350f, "Repeats" to 35f, "Mix" to 30f)),
-                        REVERB = PedalModule("Reverb", true, "Plate Reverb", mapOf("Decay" to 50f, "Tone" to 55f, "Mix" to 35f))
-                    )
-                )
-            }
+        // 1. Direct acoustic match in the Master Song Database of famous tracks
+        val masterMatch = com.example.data.model.Mk20MasterSongDatabase.findBestMatch("$songOrStyle $youtubeUrl")
+        if (masterMatch != null) {
+            val matched = masterMatch.copy(
+                title = if (songOrStyle.isNotBlank() && masterMatch.title.equals(songOrStyle.trim(), ignoreCase = true)) masterMatch.title else title,
+                youtubeLink = if (youtubeUrl.isNotBlank()) youtubeUrl else masterMatch.youtubeLink
+            )
+            return com.example.util.AcousticStudioGuardrail.sanitize(matched)
         }
+
+        // 2. Select from the 8 Locked Official M-VAVE MK-20 Hardware Matrices
+        val officialMatrix = com.example.data.model.Mk20OfficialToneMatrix.selectBestMatrix(
+            songOrStyle = songOrStyle,
+            details = details
+        )
+        val raw = officialMatrix.basePreset.copy(
+            title = title,
+            youtubeLink = youtubeUrl,
+            details = if (details.isNotBlank()) {
+                "[${officialMatrix.displayName}] $details — ${officialMatrix.description}"
+            } else {
+                "[${officialMatrix.displayName}] ${officialMatrix.basePreset.details}"
+            }
+        )
+        return com.example.util.AcousticStudioGuardrail.sanitize(raw)
     }
 }

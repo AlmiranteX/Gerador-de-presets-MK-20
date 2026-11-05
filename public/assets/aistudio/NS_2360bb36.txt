@@ -1,0 +1,17 @@
+NS:
+	ai gate:
+		gate=050, bias=050, inputDetect=off
+	ai ms gate:
+		gate=050, bias=050, inputDetect=off
+	soft gate:
+		thd=-60, inputDetect=off
+	hard gate:
+		thd=-60, inputDetect=off
+	pro gate:
+		att=050, rel=050, thd=-50, kw=050, ratio=050, inputDetect=off
+	compress:
+		sustain=050, attack=050, level=050, blend=100
+	compress pro:
+		ratio=050, gain=050, knee=050, thd=050, attack= 050, level=050, blend=100
+	f compress:
+		ratio=050, gain=050, knee=050, thd=050, attack=50, tone=060, level=050, blend=100

@@ -1,0 +1,105 @@
+DS:
+	MW-808:
+		gain=000, tone=050, level=100
+	MW-GOLD:
+		gain=050, tone=050, level=70
+	MW-OCD:
+		gain=000, tone=050, LPtype=off, mode=2/2 level=100
+	MW-SD1:
+		gain=000, tone=050, level=100
+	MW-DS1:
+		gain=000, tone=050, level=100
+	MW-RAT:
+		gain=000, filter=050, level=100
+	MW-XEP:
+		gain=000, boost=off, bright=off
+	MW-FACE:
+		fuzz=090, level=100
+	MW-HRZ:
+		gain=020, attack=1/6, bright=100, gate=000, gate mode=1/2, level=100
+	MW-EQP:
+		gain=000, tone=050, level=100, mode=1/2
+	MW-MUFF:
+		sustain=080, tone=050, level=100
+	MW-B7000:
+		gain=050, level=050, blend=050, grunt=2/4, attack=2/3, master=050
+	1._ADAM_RAFOW:
+		gain=050, level=050, bass=050, middle=050, treble, reso=000, pres=050, bright=100
+	2TS8:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	3DS1:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	4DS2:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	5M-VAVE_OD:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	6M-VAVE_DS:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	7M-VAVE_TS1:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	8M-VAVE_TS2:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	9SUPA_1:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	10SUPA_2:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	11RAT:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	12RAT_BT:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	13JHS_1:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	14JHS_2:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	15MT_1:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	16MT_2:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	17TDS:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	18XC_DS:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	19QC_DS:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	20HIGAIN:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	21M-BOOSTER:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	22TS-9:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	23BIG-DR:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	24CL_BOOST:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	25BD:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	26M90S:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	27M2000:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	28DS800:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	29DS900:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	30MAR-DS:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	31BOG_DS:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	32SONDO:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	33MID-BOST:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	34RED_DS:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	35MODEN_DS:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	36SUPEROD:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	37BLUES_DR:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	38BLACK-BOX:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	39BIG-MUFF:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100
+	SLASH_USE_YOU:
+		gain=050, level=050, bass=050, middle=050, treble=050, reso=000, pres=050, bright=100

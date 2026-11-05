@@ -1,0 +1,42 @@
+MOD:
+	CHORUS:
+		speed=10.0, depth=050, mix=050, sync=off, syncBpm=080	
+	TRI CHORUS:
+		speed=1.0, depth=050, mix=050, sync=off, syncBpm=080	
+	FLANGER:
+		speed=10.0, depth=050, fb=050, mix=050, sync=off, syncBpm=080	
+	TRI FLANGER:
+		speed=10.0, depth=050, fb=050, mix=050, sync=off, syncBpm=080
+	TREMOLO:
+		speed=10.0, depth=050, level=050, sync=off, syncBpm=080	
+	TRI TREMOLO:
+		speed=10.0, depth=050, level=050, sync=off, syncBpm=080	
+	OPTO TREMOLO:
+		speed=10.0, depth=050, level=050, sync=off, syncBpm=080	
+	PHASER:
+		speed=10.0, midcut=050, reso=050, fb=050, sync=off, syncBpm=080	
+	VIBRATO:
+		speed=10.0, depth=050, sync=off, syncBpm=080	
+	TRI VIBRATO:
+		speed=10.0, depth=050, sync=off, syncBpm=080	
+	OPTO VIBRATO:
+		speed=10.0, depth=050, sync=off, syncBpm=080	
+	UNIVIBE:
+		speed=10.0, depth=050, mix=050, sync=off, syncBpm=080	
+	TRI UNIVIBE:
+		speed=10.0, depth=050, mix=050, sync=off, syncBpm=080	
+	AUTOFILTER:
+		speed=10.0, min=050, max=050, mix=050, fb=060, sync=off, syncBpm=080	
+	PHASER STEREO:
+		speed=10.0, stage=1/2, regen=050, mix=100, lfo [sin/sqw/saw/tri/wav]=sqw, sync=off, syncBpm=080	
+	FLANGER STEREO:
+		speed=10.0, depth=050, regen=075, mix=050, jet=20, lfo [sin/sqw/saw/tri/wav]=sin, sync=off, syncBpm=080	
+	VIBE STEREO:
+		speed=10.0, stage=1/2, regen=050, mix=100, lfo [sin/sqw/saw/tri/wav]=wav, sync=off, syncBpm=080
+	CHORUS STEREO:
+		speed=10.0, depth=050, mode [harm/sin/sqw/saw/tri/wav]=harm, mix=050, sync=off, syncBpm=080
+	TREMOLO STEREO:
+		speed=10.0, depth=050, level=050, mode [sin/tube/phtn]=phtn, sync=off, syncBpm=080	
+	VIBRATO STEREO:
+		speed=10.0, depth=050, bits [min=4, max=24]=20, sync=off, syncBpm=080	
+	

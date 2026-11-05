@@ -1,0 +1,133 @@
+{
+  "entities": {
+    "UserQuota": {
+      "title": "UserQuota",
+      "description": "Tracks the authenticated user's daily free preset generation quota and lifetime PRO unlock status across reinstalls and devices.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The Firebase Auth UID of the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "Optional display email of the authenticated user."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Optional display name of the authenticated user."
+        },
+        "dailyDate": {
+          "type": "string",
+          "description": "Current quota date key in yyyy-MM-dd format."
+        },
+        "dailyCount": {
+          "type": "integer",
+          "description": "Number of free presets generated on dailyDate."
+        },
+        "proLifetime": {
+          "type": "boolean",
+          "description": "Whether the user has unlocked Preset20 AI PRO Lifetime."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the quota record was created (must submit FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the quota record was last updated (must submit FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "userId",
+        "dailyDate",
+        "dailyCount",
+        "proLifetime",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "CloudPreset": {
+      "title": "CloudPreset",
+      "description": "A guitar/bass/acoustic MK-20 preset backed up to the user's personal cloud library.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The Firebase Auth UID of the preset owner."
+        },
+        "title": {
+          "type": "string",
+          "description": "Preset title or song name."
+        },
+        "song": {
+          "type": "string",
+          "description": "Reference song or artist name."
+        },
+        "style": {
+          "type": "string",
+          "description": "Musical style or category."
+        },
+        "bpm": {
+          "type": "integer",
+          "description": "Preset tempo in BPM (20 to 300)."
+        },
+        "youtubeUrl": {
+          "type": "string",
+          "description": "Optional YouTube reference URL."
+        },
+        "details": {
+          "type": "string",
+          "description": "Additional tone notes or descriptions."
+        },
+        "jsonContent": {
+          "type": "string",
+          "description": "Serialized Mk20Preset JSON configuration."
+        },
+        "favorite": {
+          "type": "boolean",
+          "description": "Whether the preset is marked as a favorite."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the preset was created (must submit FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the preset was last updated (must submit FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "song",
+        "style",
+        "bpm",
+        "youtubeUrl",
+        "details",
+        "jsonContent",
+        "favorite",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserQuota"
+      },
+      "description": "Per-user document storing daily generation quota and PRO lifetime status."
+    },
+    "/users/{userId}/presets/{presetId}": {
+      "schema": {
+        "$ref": "#/entities/CloudPreset"
+      },
+      "description": "Per-user subcollection storing cloud-synced MK-20 presets."
+    }
+  }
+}

@@ -14,9 +14,15 @@ import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 @JsonClass(generateAdapter = true)
+data class GoogleSearchRetrieval(
+    @Json(name = "google_search") val googleSearch: Map<String, String> = emptyMap()
+)
+
+@JsonClass(generateAdapter = true)
 data class GenerateContentRequest(
     val contents: List<Content>,
-    val systemInstruction: Content? = null
+    val systemInstruction: Content? = null,
+    val tools: List<GoogleSearchRetrieval>? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -25,8 +31,15 @@ data class Content(
 )
 
 @JsonClass(generateAdapter = true)
+data class InlineData(
+    val mimeType: String,
+    val data: String
+)
+
+@JsonClass(generateAdapter = true)
 data class Part(
-    val text: String? = null
+    val text: String? = null,
+    val inlineData: InlineData? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -47,7 +60,7 @@ data class GeminiError(
 )
 
 interface GeminiApiService {
-    @POST("v1beta/models/gemini-3.5-flash:generateContent")
+    @POST("v1beta/models/gemini-2.5-flash:generateContent")
     suspend fun generateContent(
         @Query("key") apiKey: String,
         @Body request: GenerateContentRequest
@@ -77,5 +90,39 @@ object GeminiClient {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(GeminiApiService::class.java)
+    }
+
+    /**
+     * Executa a chamada ao Gemini habilitando o Google Search Grounding (pesquisa em tempo real
+     * de equipamento real do guitarrista, BPM oficial da faixa e timbre de gravação).
+     * Caso a chave não suporte a tool de busca em determinado plano, faz fallback automático
+     * transparente para a geração direta.
+     */
+    suspend fun generateWithSearchGrounding(
+        apiKey: String,
+        contents: List<Content>,
+        systemInstruction: Content? = null
+    ): GenerateContentResponse {
+        return try {
+            val groundedRequest = GenerateContentRequest(
+                contents = contents,
+                systemInstruction = systemInstruction,
+                tools = listOf(GoogleSearchRetrieval())
+            )
+            val response = service.generateContent(apiKey, groundedRequest)
+            if (!response.candidates.isNullOrEmpty()) {
+                response
+            } else {
+                service.generateContent(
+                    apiKey,
+                    GenerateContentRequest(contents = contents, systemInstruction = systemInstruction)
+                )
+            }
+        } catch (e: Exception) {
+            service.generateContent(
+                apiKey,
+                GenerateContentRequest(contents = contents, systemInstruction = systemInstruction)
+            )
+        }
     }
 }

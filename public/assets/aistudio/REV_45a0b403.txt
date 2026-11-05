@@ -1,0 +1,40 @@
+REV:
+	room:
+		decay=020, mix=030, highPass=080, lowPass=080, modDepth=040
+	hall:
+		decay=020, mix=030, highPass=080, lowPass=080, modDepth=040
+	plate:
+		decay=020, mix=030, highPass=080, lowPass=080, modDepth=040
+	spring:
+		decay=020, mix=030, highPass=080, lowPass=080, combs=050
+	shimmer:
+		decay=020, mix=030, tone=080, pitch=040, amount=040
+	bloom:
+		decay=020, mix=030, tone=080, lend=040, length=030
+	cloud:
+		decay=020, mix=030, highPass=080, lowPass=080, diff=010
+	lofi:
+		decay=020, mix=030, sampleRete=080, noiseLevel=040, modDepth=050
+	swell:
+		decay=020, mix=030, tone=080, lend=040, riseTime=030
+	room stereo:
+		decay=020, mix=030, highPass=080, lowPass=080, modDepth=040
+	hall stereo:
+		decay=020, mix=030, highPass=080, lowPass=080, modDepth=040
+	plate stereo:
+		decay=020, mix=030, highPass=080, lowPass=080, modDepth=040
+	spring stereo:
+		decay=020, mix=030, highPass=080, lowPass=080, combs=050
+	shimmer stereo:
+		decay=020, mix=030, tone=080, pitch=040, amount=040
+	bloom stereo:
+		decay=020, mix=030, tone=080, lend=040, length=030
+	cloud stereo:
+		decay=020, mix=030, highPass=080, lowPass=080, diff=010
+	lofi stereo:
+		decay=020, mix=030, sampleRete=080, noiseLevel=040, modDepth=050
+	swell streo:
+		decay=020, mix=030, tone=080, lend=040, riseTime=030
+	
+		
+	

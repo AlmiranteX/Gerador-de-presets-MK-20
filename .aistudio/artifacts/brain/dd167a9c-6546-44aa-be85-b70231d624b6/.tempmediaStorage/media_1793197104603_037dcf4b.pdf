@@ -1,0 +1,221 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Length 6636 >>
+stream
+0.04 0.06 0.11 rg
+0 806 595 36 re f
+0.06 0.73 0.51 rg
+0 804 595 2 re f
+BT /F2 8.5 Tf 0.65 0.95 0.82 rg 48 819 Td (MK-20 TONE GENERATOR  |  DOCUMENTO FONTE E MANUAL DE FUNCIONALIDADES) Tj ET
+0.06 0.10 0.18 rg
+48 724 499 64 re f
+0.06 0.73 0.51 RG 2 w
+48 724 499 64 re S
+BT /F2 16 Tf 1.00 1.00 1.00 rg 64 762 Td (MK-20 TONE GENERATOR) Tj ET
+BT /F1 10 Tf 0.35 0.92 0.70 rg 64 740 Td (Gerador com Gemini AI - Guia de Funcionalidades, Engenharia e Roteiro de Uso) Tj ET
+0.91 0.97 0.94 rg
+48 690 499 22 re f
+0.05 0.59 0.41 rg
+48 690 4 22 re f
+BT /F2 12 Tf 0.04 0.38 0.27 rg 60 697 Td (1. VIS\303O GERAL DO PROJETO) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 672 Td (O MK-20 Tone Generator \351 um aplicativo Android desenvolvido em Kotlin e Jetpack Compose projetado) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 658 Td (especificamente para guitarristas que utilizam a pedaleira multiefeitos M-Vave MK-20 \(gerenciada) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 644 Td (pelo software oficial M-EFCS no computador\).) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 626 Td (O objetivo central do aplicativo \351 transformar o nome de qualquer m\372sica, artista, link do YouTube) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 612 Td (ou trecho de \341udio capturado pelo microfone em um preset completo e calibrado para a M-Vave MK-20,) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 598 Td (exportando diretamente o arquivo bin\341rio nativo \(.mk20 de 412 bytes\) pronto para importar na) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 584 Td (pedaleira.) Tj ET
+0.91 0.97 0.94 rg
+48 554 499 22 re f
+0.05 0.59 0.41 rg
+48 554 4 22 re f
+BT /F2 12 Tf 0.04 0.38 0.27 rg 60 561 Td (2. ENGENHARIA DO TIMBRE E FUNCIONAMENTO INTERNO) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 536 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 536 Td (1. Intelig\352ncia Artificial \(Gerador com Gemini AI\): Analisa a grava\347\343o original da m\372sica) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 522.5 Td (solicitada \(amplificadores hist\363ricos, caixas, pedais de overdrive, compress\343o, modula\347\365es e) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 509.0 Td (ambi\352ncias\) e converte automaticamente para os modelos exatos existentes no firmware da M-Vave) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 495.5 Td (MK-20.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 480.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 480.0 Td (2. Motor Ac\372stico Determin\355stico \(Mk20ToneEngine\): Garante que todos os 9 m\363dulos da pedaleira) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 466.5 Td (fiquem dentro da faixa segura de 0 a 100 e aplica uma curadoria ac\372stica anti-estrid\352ncia) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 453.0 Td (\(ajustando ganho, presen\347a, agudos e cortes HPF/LPF do equalizador para evitar o som) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 439.5 Td (artificial de 'abelha' em liga\347\343o direta\).) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 424.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 424.0 Td (3. Codificador Bin\341rio Nativo \(.mk20 de 412 Bytes + CRC-16\): A pedaleira M-Vave MK-20 utiliza) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 410.5 Td (um protocolo bin\341rio propriet\341rio de 412 bytes. O aplicativo constr\363i esse arquivo byte a byte) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 397.0 Td (com o cabe\347alho 'MK20', nome do preset em ASCII de 16 caracteres, mapa ON/OFF dos 9 pedais,) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 383.5 Td (offsets de mem\363ria reais \(AMP em 0x68, CAB em 0x84, EQ em 0xA0, MOD em 0xC0, DLY em 0xDC, REV) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 370.0 Td (em 0xF8\) e calcula o checksum matem\341tico CRC-16/XMODEM nos \372ltimos 2 bytes \(0x19A-0x19B\).) Tj ET
+0.91 0.97 0.94 rg
+48 342.5 499 22 re f
+0.05 0.59 0.41 rg
+48 342.5 4 22 re f
+BT /F2 12 Tf 0.04 0.38 0.27 rg 60 349.5 Td (3. FUNCIONALIDADES DA ABA 'PEDALEIRA') Tj ET
+BT /F2 10.5 Tf 0.06 0.30 0.22 rg 48 322.5 Td (A\) 3 Formas de Entrada para Criar um Timbre:) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 307.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 307.5 Td (Busca Inteligente por M\372sica ou Artista: Integrada ao cat\341logo musical \(iTunes API\). Ao) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 294.0 Td (digitar o nome da m\372sica ou banda, o app exibe sugest\365es com capa do \341lbum, nome do artista e) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 280.5 Td (g\352nero musical para dar contexto preciso ao gerador.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 265.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 265.0 Td (Link do YouTube: O usu\341rio cola o link de qualquer v\355deo ou cover do YouTube. O aplicativo) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 251.5 Td (extrai automaticamente o t\355tulo do v\355deo, o canal e a miniatura \(thumbnail\) para recriar o) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 238.0 Td (timbre correspondente.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 222.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 222.5 Td (Ouvir M\372sica pelo Microfone \(An\341lise de \301udio de 5 Segundos\): Ao tocar no bot\343o de microfone,) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 209.0 Td (o app escuta 5 segundos do \341udio ambiente e analisa o espectro de graves, m\351dios, presen\347a de) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 195.5 Td (agudos, din\342mica e BPM estimado, preenchendo a refer\352ncia sonora.) Tj ET
+BT /F2 10.5 Tf 0.06 0.30 0.22 rg 48 178.0 Td (B\) Seletor de Fun\347\343o da Guitarra \(Base, Solo, Arranjo\):) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 163.0 Td (Como a maioria das m\372sicas possui mais de uma guitarra \(ou diferentes momentos na faixa\), o seletor) Tj ET
+BT /F1 10 Tf 0.15 0.18 0.22 rg 48 149.0 Td (permite escolher qual fun\347\343o voc\352 quer gerar ou alternar em tempo real:) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 131.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 131.0 Td (Guitarra Base \(R\355tmica\): Timbre encorpado, firme e definido para riffs e acordes. Mant\351m o) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 117.5 Td (Noise Gate firme, controla o excesso de ganho para n\343o embolar as cordas graves e reduz o) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 104.0 Td (n\355vel de Delay e Reverb.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 88.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 88.5 Td (Guitarra Solo \(Lead\): Timbre destacado na frente da mixagem com mais sustain e proje\347\343o. Ativa) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 75.0 Td (ou empurra o pedal de Drive \(Overdrive/Boost\), real\347a os m\351dios no EQ \(800Hz e 2.2kHz\),) Tj ET
+BT /F1 8.5 Tf 0.45 0.50 0.56 rg 48 26 Td (MK-20 Tone Generator - Guia Oficial e Fonte para NotebookLM   |   Pagina 1 de 3) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 7429 >>
+stream
+0.04 0.06 0.11 rg
+0 806 595 36 re f
+0.06 0.73 0.51 rg
+0 804 595 2 re f
+BT /F2 8.5 Tf 0.65 0.95 0.82 rg 48 819 Td (MK-20 TONE GENERATOR  |  DOCUMENTO FONTE E MANUAL DE FUNCIONALIDADES) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 774 Td (adiciona +4 de volume no AMP e abre o Delay e Reverb para encorpar as notas longas.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 758.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 758.5 Td (Guitarra Arranjo \(Ambient / Dedilhados\): Focado em texturas cristalinas, arpejos e ambi\352ncias) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 745.0 Td (espaciais. Suaviza a satura\347\343o para separar as notas dos acordes, ativa modula\347\343o espacial) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 731.5 Td (\(Chorus\), amplia o Tape Delay e usa Hall ou Shimmer Reverb.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 716.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 716.0 Td (Adapta\347\343o Instant\342nea e Sufixo no Arquivo: Voc\352 pode clicar em Base, Solo ou Arranjo mesmo) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 702.5 Td (ap\363s gerar o timbre para recalcular os pedais na hora. Ao exportar o arquivo .mk20, o app) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 689.0 Td (adiciona automaticamente o sufixo \(_BASE, _SOLO ou _ARRANJO\).) Tj ET
+BT /F2 10.5 Tf 0.06 0.30 0.22 rg 48 671.5 Td (C\) Os 9 M\363dulos Reais da Cadeia de Sinal da M-Vave MK-20:) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 656.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 656.5 Td (1. FX \(Din\342mica/Filtro\): Compressores \(Opto Comp, Studio Comp\), Boost \(AC Boost\) e Wah.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 641.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 641.0 Td (2. NS \(Noise Gate\): Redutor de ru\355do inteligente com controles de Threshold e Release.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 625.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 625.5 Td (3. DS \(Drive/Distor\347\343o\): 16 pedais reais mapeados \(Tube Screamer 808, SD1, Klon, RAT, DS1,) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 612.0 Td (Fuzz, etc.\).) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 596.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 596.5 Td (4. AMP \(Amplificador\): 35 pr\351-amplificadores reais da MK-20 \(65US_TW, UK_C30, 800_MOD,) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 583.0 Td (RECT_MOD, 48CH1_ME, 5153_RED, BE_100, etc.\) com Gain, Level, Bass, Middle, Treble, Reso, Pres) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 569.5 Td (e Bright.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 554.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 554.0 Td (5. CAB \(Gabinete IR\): 25 simula\347\365es de caixas 1x12, 2x12 e 4x12 com LowCut, HighCut e) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 540.5 Td (MicDistance.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 525.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 525.0 Td (6. EQ \(Equalizador de 6 Bandas\): Bandas em 100Hz, 250Hz, 800Hz, 2.2kHz, 4.5kHz e 8kHz + HPF e) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 511.5 Td (LPF.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 496.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 496.0 Td (7. MOD \(Modula\347\343o\): 18 efeitos incluindo CE-1 Chorus, Tri-Chorus, Flanger, Phase 90, Tremolo e) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 482.5 Td (Vibrato.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 467.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 467.0 Td (8. DLY \(Delay\): Digital, Analog, Tape Echo, Dual e Ping-Pong Delay com Time, Feedback e Mix.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 451.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 451.5 Td (9. REV \(Reverb\): Room, Hall, Plate, Spring, Shimmer e Cloud Reverb com Decay, Mix e PreDelay.) Tj ET
+0.91 0.97 0.94 rg
+48 424.0 499 22 re f
+0.05 0.59 0.41 rg
+48 424.0 4 22 re f
+BT /F2 12 Tf 0.04 0.38 0.27 rg 60 431.0 Td (4. ABA 'BIN\301RIO \(.mk20\)' E ABA 'SALVOS') Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 406.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 406.0 Td (Exportar .mk20 \(412 Bytes Nativo\): Salva o arquivo bin\341rio pronto para o programa M-EFCS no) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 392.5 Td (PC. O nome do arquivo j\341 inclui a fun\347\343o da guitarra \(ex.: Fade_to_Black_SOLO.mk20\).) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 377.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 377.0 Td (Molde Oficial \(.mk20 Template\): Permite carregar um arquivo .mk20 exportado do seu pr\363prio PC) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 363.5 Td (como molde estrutural. O app clona a estrutura exata do seu firmware \(ex.: v85\) e injeta) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 350.0 Td (apenas os novos par\342metros dos pedais.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 334.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 334.5 Td (Visualizador JSON: Exibe a ficha t\351cnica estruturada de todos os par\342metros do preset,) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 321.0 Td (permitindo copiar ou exportar em .json.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 305.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 305.5 Td (Biblioteca de Presets Salvos: Armazena seus timbres favoritos no celular, possui busca r\341pida) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 292.0 Td (por m\372sica ou artista e permite importar arquivos .mk20 externos para inspecionar e editar) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 278.5 Td (seus pedais dentro do aplicativo.) Tj ET
+0.91 0.97 0.94 rg
+48 251.0 499 22 re f
+0.05 0.59 0.41 rg
+48 251.0 4 22 re f
+BT /F2 12 Tf 0.04 0.38 0.27 rg 60 258.0 Td (5. ROTEIRO PASSO A PASSO: COMO USAR E PASSAR PARA A PEDALEIRA) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 233.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 233.0 Td (PASSO 1 - Escolher a M\372sica: Na aba Pedaleira, digite o nome da m\372sica/artista, cole um link) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 219.5 Td (do YouTube ou use o Microfone por 5 segundos.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 204.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 204.0 Td (PASSO 2 - Selecionar a Fun\347\343o da Guitarra: Escolha entre Base \(riffs e acordes\), Solo \(lead) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 190.5 Td (com boost e delay\) ou Arranjo \(dedilhados e ambi\352ncia\).) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 175.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 175.0 Td (PASSO 3 - Gerar e Ajustar o Timbre: Toque em 'Gerar Timbre MK-20'. Confira os 9 m\363dulos no) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 161.5 Td (rack virtual e, se desejar, alterne entre Base, Solo e Arranjo ou deslize qualquer knob para) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 148.0 Td (personalizar.) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 132.5 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 132.5 Td (PASSO 4 - Exportar o Arquivo .mk20: Abra a aba 'Bin\341rio \(.mk20\)' e toque em 'Exportar .mk20'.) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 119.0 Td (Envie o arquivo gerado para o seu computador \(via WhatsApp, Telegram, Google Drive ou cabo) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 105.5 Td (USB\).) Tj ET
+BT /F2 10 Tf 0.05 0.59 0.41 rg 52 90.0 Td (-) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 90.0 Td (PASSO 5 - Importar na Pedaleira pelo PC \(Software M-EFCS\): Com a pedaleira M-Vave MK-20) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 76.5 Td (conectada ao PC via USB, abra o programa oficial M-EFCS, clique em 'Import' no menu lateral) Tj ET
+BT /F1 8.5 Tf 0.45 0.50 0.56 rg 48 26 Td (MK-20 Tone Generator - Guia Oficial e Fonte para NotebookLM   |   Pagina 2 de 3) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 460 >>
+stream
+0.04 0.06 0.11 rg
+0 806 595 36 re f
+0.06 0.73 0.51 rg
+0 804 595 2 re f
+BT /F2 8.5 Tf 0.65 0.95 0.82 rg 48 819 Td (MK-20 TONE GENERATOR  |  DOCUMENTO FONTE E MANUAL DE FUNCIONALIDADES) Tj ET
+BT /F1 9.8 Tf 0.15 0.18 0.22 rg 64 774 Td (esquerdo, selecione o arquivo .mk20 gerado pelo app e clique em 'Save' para gravar no slot.) Tj ET
+BT /F1 8.5 Tf 0.45 0.50 0.56 rg 48 26 Td (MK-20 Tone Generator - Guia Oficial e Fonte para NotebookLM   |   Pagina 3 de 3) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000134 00000 n 
+0000000231 00000 n 
+0000000333 00000 n 
+0000000428 00000 n 
+0000007116 00000 n 
+0000007262 00000 n 
+0000014743 00000 n 
+0000014889 00000 n 
+0000015401 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+15549
+%%EOF

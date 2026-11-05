@@ -1,0 +1,58 @@
+Delays:
+
+	Clean:
+		time=0.500, fb=030, mix=050, sync=off, syncBPM=080
+	Modern:
+		time=0.500, fb=030, mix=050, phaser=000, mod=000, sync=off, syncBPM=080
+	echo:
+		time=0.500, fb=030, mix=050, sync=off, syncBPM=080
+	analog:
+		time=0.500, fb=030, mix=050, sync=off, syncBPM=080
+	duck:
+		time=0.500, fb=030, mix=050, release=050, speed=050, depth=050, sync=off, syncBPM=080
+	dtype:
+		time=0.500, fb=030, mix=050, grit=030, speed=015, depth=015, sync=off, syncBPM=080
+	tremolo:
+		time=0.500, fb=030, mix=050, pattern=1/1, speed=050, depth=050, sync=off, syncBPM=080
+	filter:
+		time=0.500, fb=030, mix=050, filter=050, speed=050, depth=015, sync=off, syncBPM=080
+	dual:
+		time=0.500, fb=030, mix=050, t-mode=1/8, speed=050, depth=050, sync=off, syncBPM=080
+	lofi:
+		time=0.500, fb=030, mix=050, grit=030, speed=015, depth=015, sync=off, syncBPM=080
+	pattern:
+		time=0.500, fb=030, mix=050, pattern=008, speed=015, depth=015, sync=off, syncBPM=080
+	ice:
+		time=0.500, fb=030, mix=050, pitch=006, mod=050, sync=off, syncBPM=080
+	reverse:
+		time=0.500, fb=030, mix=050, phaser=010, mod=015, sync=off, syncBPM=080
+	pingpong stereo:
+		time=0.500, fb=030, mix=050, sync=off, syncBPM=080
+	clean stereo:
+		time=0.500, fb=030, mix=050, sync=off, syncBPM=080
+	modern stereo:
+		time=0.500, fb=030, mix=050, phaser=010, mod=015, sync=off, syncBPM=080
+	echo stereo:
+		time=0.500, fb=030, mix=050, sync=off, syncBPM=080
+	analog stereo:
+		time=0.500, fb=030, mix=050, sync=off, syncBPM=080
+	duck stereo:
+		time=0.500, fb=030, mix=050, release=050, speed=050, depth=050, sync=off, syncBPM=080
+	dtype stereo:
+		time=0.500, fb=030, mix=050, grit=030, speed=015, depth=015, sync=off, syncBPM=080
+	tremolo stereo:
+		time=0.500, fb=030, mix=050, pattern=1/1, TremobDepth=030, speed=015, depth=050, sync=off, syncBPM=080
+	filter stereo:
+		time=0.500, fb=030, mix=050, filter=050, speed=050, depth=015, sync=off, syncBPM=080
+	dual stereo:
+		time=0.500, fb=030, mix=050, t-mode=1/8, speed=050, depth=050, sync=off, syncBPM=080
+	lofi stereo:
+		time=0.500, fb=030, mix=050, grit=030, speed=015, depth=015, sync=off, syncBPM=080
+	pattern stereo:
+		time=0.500, fb=030, mix=050, pattern=008, speed=015, depth=015, sync=off, syncBPM=080
+	ice stereo:
+		time=0.500, fb=030, mix=050, pitch=006, mod=050, sync=off, syncBPM=080
+	reverse stereo:
+		time=0.500, fb=030, mix=050, phaser=010, mod=015, sync=off, syncBPM=080
+		
+		
